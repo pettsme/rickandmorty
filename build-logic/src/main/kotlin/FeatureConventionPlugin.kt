@@ -18,17 +18,15 @@ class FeatureConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("com.pettsme.showcase.core")
                 apply("com.pettsme.showcase.compose")
-                apply("com.pettsme.showcase.test.coverage")
                 apply("com.google.devtools.ksp")
             }
 
             val versionCatalog = getVersionCatalog()
 
             dependencies {
-                add(IMPLEMENTATION, project(":core:common"))
+                add(IMPLEMENTATION, project(":core:viewmodelbase"))
                 add(IMPLEMENTATION, project(":core:network"))
                 add(IMPLEMENTATION, project(":core:ui"))
-                add(IMPLEMENTATION, project(":core:testing"))
 
                 add(KSP, versionCatalog.library("moshi.codegen"))
 
