@@ -31,4 +31,6 @@ buildCache {
 
 rootProject.name = "RickAndMorty"
 include(":app")
+include(":core:base")
+include(":core:viewmodelbase")
 include(":core:network")
