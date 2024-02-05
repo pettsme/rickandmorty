@@ -16,7 +16,6 @@ class CoreConventionPlugin : Plugin<Project> {
                 apply("com.android.library")
                 apply("kotlin-android")
                 apply("com.pettsme.showcase.library.build.types")
-                apply("com.pettsme.showcase.detekt")
                 apply("com.pettsme.showcase.spotless")
                 apply("com.pettsme.showcase.hilt")
             }
