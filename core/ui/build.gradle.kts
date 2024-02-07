@@ -12,6 +12,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:base"))
+
     api(libs.androidx.hilt.navigation.compose)
     api(libs.bundles.compose.core)
     api(libs.bundles.coil)

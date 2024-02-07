@@ -1,4 +1,4 @@
-package com.pettsme.showcase.viewmodelbase.presentation.model
+package com.pettsme.showcase.base.presentation.model
 
 sealed interface LoadingState {
     data object NotLoading : LoadingState

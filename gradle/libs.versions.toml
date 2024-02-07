@@ -30,6 +30,7 @@ composeMaterial3AdaptiveNavigation = "1.0.0-alpha02"
 
 ktlint = "0.50.0"
 spotlessPlugin = "1.21.0"
+material3Android = "1.2.0-rc01"
 
 [libraries]
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
@@ -43,10 +44,11 @@ androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-compose-material3-material3 = { group ="androidx.compose.material3", name = "material3" }
-androidx-compose-material3-windowSizeClasses = { group ="androidx.compose.material3", name = "material3-window-size-class" }
-androidx-compose-material3-adaptive = { group ="androidx.compose.material3", name = "material3-adaptive", version.ref="composeMaterial3Adaptive" }
-androidx-compose-material3-adaptive-navigation = { group ="androidx.compose.material3", name = "material3-adaptive-navigation-suite", version.ref="composeMaterial3AdaptiveNavigation" }
+androidx-compose-material3-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3Android" }
+androidx-compose-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
+androidx-compose-material3-windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class" }
+androidx-compose-material3-adaptive = { group = "androidx.compose.material3", name = "material3-adaptive", version.ref = "composeMaterial3Adaptive" }
+androidx-compose-material3-adaptive-navigation = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite", version.ref = "composeMaterial3AdaptiveNavigation" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidxLifecycle" }
@@ -78,11 +80,11 @@ spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plug
 [bundles]
 retrofit = ["retrofit-core", "retrofit-moshi-converter"]
 coil = ["coil-kt", "coil-kt-compose"]
-compose-core = ["androidx-activity-compose","androidx-compose-foundation", "androidx-compose-foundation-layout", "androidx-compose-ui", "androidx-compose-material3-material3"]
+compose-core = ["androidx-activity-compose", "androidx-compose-foundation", "androidx-compose-foundation-layout", "androidx-compose-ui", "androidx-compose-material3-material3", "androidx-compose-material3-android"]
 lifecycle-ktx = ["androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-runtime-compose"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

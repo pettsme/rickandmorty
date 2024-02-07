@@ -11,5 +11,7 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":core:base"))
+    implementation(project(":core:ui"))
+    implementation(project(":feature:characterlist"))
 }

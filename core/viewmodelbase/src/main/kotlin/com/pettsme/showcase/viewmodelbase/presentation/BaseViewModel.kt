@@ -3,7 +3,7 @@ package com.pettsme.showcase.viewmodelbase.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pettsme.showcase.base.DispatcherProvider
-import com.pettsme.showcase.viewmodelbase.presentation.model.BaseState
+import com.pettsme.showcase.base.presentation.model.ViewState
 import com.pettsme.showcase.viewmodelbase.presentation.model.ViewEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -20,13 +20,13 @@ import timber.log.Timber
 /**
  * This is the common part of all ViewModels, dealing with ViewState and SideEffect propagation.
  */
-abstract class BaseViewModel<ViewState : BaseState, Action>(
-    initialState: ViewState,
+abstract class BaseViewModel<VS : ViewState, Action>(
+    initialState: VS,
     protected val dispatcherProvider: DispatcherProvider,
 ) : ViewModel() {
 
-    private val _state: MutableStateFlow<ViewState> = MutableStateFlow(initialState)
-    val state: StateFlow<ViewState> = _state.asStateFlow()
+    private val _state: MutableStateFlow<VS> = MutableStateFlow(initialState)
+    val state: StateFlow<VS> = _state.asStateFlow()
 
     private val _events = Channel<ViewEvent>(
         capacity = Int.MAX_VALUE,
@@ -38,7 +38,7 @@ abstract class BaseViewModel<ViewState : BaseState, Action>(
     val events
         get() = _events.receiveAsFlow()
 
-    protected val currentState: ViewState
+    protected val currentState: VS
         get() = state.value
 
     abstract fun onViewAction(viewAction: Action)
@@ -60,7 +60,7 @@ abstract class BaseViewModel<ViewState : BaseState, Action>(
     /**
      * Updates the [currentState] with the value returned from the [transform] lambda
      */
-    protected fun updateState(transform: (ViewState) -> ViewState) {
+    protected fun updateState(transform: (VS) -> VS) {
         _state.update(transform)
     }
 }

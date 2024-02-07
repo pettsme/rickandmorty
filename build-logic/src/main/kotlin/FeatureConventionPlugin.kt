@@ -6,6 +6,7 @@ import com.pettsme.showcase.build.logic.model.BuildConstants.TEST_RUNTIME
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.project
 import org.jetbrains.kotlin.gradle.utils.IMPLEMENTATION
 
 /**
@@ -24,6 +25,7 @@ class FeatureConventionPlugin : Plugin<Project> {
             val versionCatalog = getVersionCatalog()
 
             dependencies {
+                add(IMPLEMENTATION, project(":core:base"))
                 add(IMPLEMENTATION, project(":core:viewmodelbase"))
                 add(IMPLEMENTATION, project(":core:network"))
                 add(IMPLEMENTATION, project(":core:ui"))
