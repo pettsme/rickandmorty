@@ -27,7 +27,7 @@ import com.pettsme.showcase.viewmodelbase.presentation.model.Ignored
 
 @Composable
 @ExperimentalMaterial3Api
-fun CharacterListScreen() {
+fun CharacterListScreen(modifier: Modifier = Modifier) {
     val viewModel: CharacterListViewModel = hiltViewModel()
     val state by rememberFlowOnLifecycle(flow = viewModel.state)
         .collectAsState(CharacterListViewState.initialState)
@@ -40,7 +40,7 @@ fun CharacterListScreen() {
 
     val pullToRefreshState = rememberPullToRefreshState()
 
-    Box(Modifier.nestedScroll(pullToRefreshState.nestedScrollConnection)) {
+    Box(modifier.nestedScroll(pullToRefreshState.nestedScrollConnection)) {
         LazyColumn(Modifier.fillMaxSize()) {
             if (!pullToRefreshState.isRefreshing) {
                 items(state.data) { character ->
