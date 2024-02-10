@@ -7,7 +7,7 @@ import com.pettsme.showcase.base.presentation.model.ViewState
 data class CharacterListViewState(
     override val loadingState: LoadingState,
     override val errorState: ErrorState?,
-    val data: List<CharacterViewItem>,
+    val data: List<CharacterListViewItem>,
 ) : ViewState {
     companion object {
         val initialState =
