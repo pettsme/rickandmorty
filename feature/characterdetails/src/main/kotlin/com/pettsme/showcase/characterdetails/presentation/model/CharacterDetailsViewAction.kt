@@ -1,0 +1,3 @@
+package com.pettsme.showcase.characterdetails.presentation.model
+
+internal sealed interface CharacterDetailsViewAction

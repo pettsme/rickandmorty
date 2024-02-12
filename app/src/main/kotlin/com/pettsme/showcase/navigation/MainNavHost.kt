@@ -30,8 +30,8 @@ fun MainNavHost(
         composable(
             route = "characters/{id}",
             arguments = listOf(navArgument("id") { type = NavType.IntType }),
-        ) { navBackStackEntry ->
-            CharacterDetailsScreen(navBackStackEntry.arguments?.getInt("id"))
+        ) {
+            CharacterDetailsScreen()
         }
     }
 }
