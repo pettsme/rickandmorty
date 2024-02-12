@@ -61,7 +61,7 @@ internal fun CharacterListScreenContent(
     }
 
     if (viewState.isError) {
-        // show error based on other stuff (whether it's partial data error or inital
+        // show error based on other stuff (whether it's partial data error or initial
     }
 
     LazyColumn(modifier.fillMaxSize()) {

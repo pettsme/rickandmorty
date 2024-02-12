@@ -25,7 +25,6 @@ internal class CharacterListViewModel @Inject constructor(
     private var nextPage: Int? = null
 
     init {
-        println("init")
         getData(page = 1)
     }
 
@@ -38,11 +37,8 @@ internal class CharacterListViewModel @Inject constructor(
             }
             repository.getCharacters(page = page).process(
                 success = { characterListDomainModel ->
-                    println("get chars, page: $page")
                     characters.addAll(characterListDomainModel.characters)
                     nextPage = characterListDomainModel.nextPage
-
-                    println("nextPage: $nextPage")
                     refreshStateWithData()
                 },
                 failure = ::handleError,
@@ -73,7 +69,6 @@ internal class CharacterListViewModel @Inject constructor(
     override fun onViewAction(viewAction: CharacterListViewAction) {
         when (viewAction) {
             PullRefreshInitiated -> {
-                println("pull refresh init")
                 getData(page = 1)
             }
 
@@ -82,11 +77,10 @@ internal class CharacterListViewModel @Inject constructor(
     }
 
     override fun handleError(throwable: Throwable) {
-        println("error")
         updateState { state ->
             state.copy(
                 isLoading = false,
-                errorState = ErrorState.InlineError(throwable.message ?: "Ops"),
+                errorState = ErrorState.InlineError(throwable.message ?: "Opps, something went wrong"),
             )
         }
     }
