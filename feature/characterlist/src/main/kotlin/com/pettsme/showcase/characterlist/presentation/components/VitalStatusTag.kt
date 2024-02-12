@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.pettsme.showcase.characterlist.domain.model.VitalStatus
+import com.pettsme.showcase.base.domain.model.VitalStatus
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.values.AppTheme
 import com.pettsme.showcase.ui.values.Dimen

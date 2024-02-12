@@ -1,6 +1,7 @@
 package com.pettsme.showcase.characterdetails.data
 
 import com.pettsme.showcase.characterdetails.data.model.CharacterDetailsApiModel
+import com.pettsme.showcase.characterdetails.data.model.EpisodeApiModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,4 +12,9 @@ internal interface CharacterDetailsApi {
     suspend fun getCharacter(
         @Path("id") id: Int,
     ): Response<CharacterDetailsApiModel>
+
+    @GET("episode/{ids}")
+    suspend fun getEpisodes(
+        @Path("ids") ids: String,
+    ): Response<List<EpisodeApiModel>>
 }

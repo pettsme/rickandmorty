@@ -1,6 +1,6 @@
 package com.pettsme.showcase.characterlist.presentation.model
 
-import com.pettsme.showcase.characterlist.domain.model.VitalStatus
+import com.pettsme.showcase.base.domain.model.VitalStatus
 
 internal sealed interface CharacterListViewItem {
     data class DataItem(

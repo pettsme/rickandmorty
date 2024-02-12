@@ -8,6 +8,8 @@ import com.pettsme.showcase.characterdetails.domain.model.CharacterDetailsDomain
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewAction
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewData
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewState
+import com.pettsme.showcase.characterdetails.presentation.model.EpisodeViewData
+import com.pettsme.showcase.characterdetails.presentation.model.LocationViewData
 import com.pettsme.showcase.viewmodelbase.presentation.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -36,8 +38,8 @@ internal class CharacterDetailsViewModel @Inject constructor(
                 )
             }
             repository.getCharacter(characterId).process(
-                success = { characterDomainModel ->
-                    characterDetails = characterDomainModel
+                success = { model ->
+                    characterDetails = model
                     refreshStateWithData()
                 },
                 failure = ::handleError,
@@ -47,10 +49,39 @@ internal class CharacterDetailsViewModel @Inject constructor(
 
     private fun refreshStateWithData() {
         characterDetails?.let { details ->
-            updateState { state ->
-                state.copy(
-                    isLoading = false,
-                    data = CharacterDetailsViewData(details.name),
+            launch {
+                repository.getEpisodesForCharacter(details).process(
+                    success = { episodes ->
+                        with(details) {
+                            updateState { state ->
+                                state.copy(
+                                    isLoading = false,
+                                    data = CharacterDetailsViewData(
+                                        id = id,
+                                        name = name,
+                                        status = status,
+                                        species = species,
+                                        imageUrl = imageUrl,
+                                        gender = gender,
+                                        origin = LocationViewData(origin.id, origin.name),
+                                        lastKnownLocation = LocationViewData(
+                                            lastKnownLocation.id,
+                                            lastKnownLocation.name
+                                        ),
+                                        presentInEpisodes = episodes.map {
+                                            EpisodeViewData(
+                                                id = it.id,
+                                                name = it.name,
+                                                episodeCode = it.episodeCode,
+                                                aired = it.aired
+                                            )
+                                        },
+                                    ),
+                                )
+                            }
+                        }
+                    },
+                    failure = ::handleError,
                 )
             }
         }
@@ -58,7 +89,8 @@ internal class CharacterDetailsViewModel @Inject constructor(
 
     override fun onViewAction(viewAction: CharacterDetailsViewAction) {
         when (viewAction) {
-            else -> { /* later */ }
+            else -> { /* later */
+            }
         }
     }
 

@@ -4,16 +4,16 @@ import com.pettsme.showcase.characterlist.data.model.CharacterListApiModel
 import com.pettsme.showcase.characterlist.data.model.CharacterListItemApiModel
 import com.pettsme.showcase.characterlist.domain.model.CharacterListDomainModel
 import com.pettsme.showcase.characterlist.domain.model.CharacterListItemDomainModel
-import com.pettsme.showcase.characterlist.domain.model.VitalStatus
-import com.pettsme.showcase.network.domain.PageNumberExtractor
+import com.pettsme.showcase.base.domain.model.VitalStatus
+import com.pettsme.showcase.network.domain.IdExtractor
 import javax.inject.Inject
 
 internal class CharacterListApiToDomainMapper @Inject constructor(
-    private val pageNumberExtractor: PageNumberExtractor,
+    private val idExtractor: IdExtractor,
 ) {
     fun mapToDomainModel(model: CharacterListApiModel): CharacterListDomainModel =
         CharacterListDomainModel(
-            nextPage = pageNumberExtractor.getPageNumber(model.info.next),
+            nextPage = idExtractor.getNumber(IdExtractor.Type.PAGE, model.info.next),
             characters = model.results.map { it.mapToDomainModel() },
         )
 

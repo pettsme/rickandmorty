@@ -1,6 +1,6 @@
-package com.pettsme.showcase.characterlist.domain.model
+package com.pettsme.showcase.base.domain.model
 
-internal enum class VitalStatus(val value: String) {
+enum class VitalStatus(val value: String) {
     ALIVE("alive"),
     DEAD("dead"),
     UNKNOWN("unknown"),

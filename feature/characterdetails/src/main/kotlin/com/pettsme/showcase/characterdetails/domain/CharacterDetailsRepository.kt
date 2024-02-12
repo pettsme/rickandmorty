@@ -12,4 +12,10 @@ internal class CharacterDetailsRepository @Inject constructor(
 ) {
     suspend fun getCharacter(id: Int): ApiResult<CharacterDetailsDomainModel> =
         characterDetailsApi.getCharacter(id).asResult().map { mapper.mapToDomainModel(it) }
+
+    suspend fun getEpisodesForCharacter(character: CharacterDetailsDomainModel) =
+        character.presentInEpisodes.joinToString(",").let {
+            characterDetailsApi.getEpisodes(it).asResult()
+                .map { listOfEpisodes -> mapper.mapToDomainModel(listOfEpisodes) }
+        }
 }

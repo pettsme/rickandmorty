@@ -1,5 +1,6 @@
 package com.pettsme.showcase.characterlist.data.model
 
+import com.pettsme.showcase.network.data.model.LocationApiModel
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
@@ -11,6 +12,3 @@ internal data class CharacterListItemApiModel(
     val image: String,
     val origin: LocationApiModel,
 )
-
-@JsonClass(generateAdapter = true)
-internal data class LocationApiModel(val name: String, val url: String)
