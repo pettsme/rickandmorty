@@ -1,4 +1,4 @@
-package com.pettsme.showcase.ui.theme
+package com.pettsme.showcase.ui.values
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

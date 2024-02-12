@@ -1,4 +1,4 @@
-package com.pettsme.showcase.ui.theme
+package com.pettsme.showcase.ui.values
 
 import androidx.compose.ui.graphics.Color
 

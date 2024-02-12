@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.pettsme.showcase.characterlist.presentation.CharacterListScreen
-import com.pettsme.showcase.ui.theme.AppTheme
+import com.pettsme.showcase.ui.values.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

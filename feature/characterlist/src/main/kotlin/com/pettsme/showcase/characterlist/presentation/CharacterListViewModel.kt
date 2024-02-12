@@ -10,6 +10,7 @@ import com.pettsme.showcase.characterlist.presentation.model.CharacterListViewIt
 import com.pettsme.showcase.characterlist.presentation.model.CharacterListViewState
 import com.pettsme.showcase.viewmodelbase.presentation.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,9 +33,10 @@ internal class CharacterListViewModel @Inject constructor(
         launch {
             updateState { state ->
                 state.copy(
-                    isLoading = nextPage == 1,
+                    isLoading = nextPage == null,
                 )
             }
+            delay(2000)
             repository.getCharacters(page = page).process(
                 success = { characterListDomainModel ->
                     characters.addAll(characterListDomainModel.characters)
@@ -49,8 +51,10 @@ internal class CharacterListViewModel @Inject constructor(
     private fun refreshStateWithData() {
         val dataItems: MutableList<CharacterListViewItem> = characters.map {
             CharacterListViewItem.DataItem(
-                it.name,
-                it.vitalStatus,
+                name = it.name,
+                status = it.vitalStatus,
+                species = it.species,
+                imageUrl = it.imageUrl,
             )
         }.toMutableList()
 
@@ -80,7 +84,9 @@ internal class CharacterListViewModel @Inject constructor(
         updateState { state ->
             state.copy(
                 isLoading = false,
-                errorState = ErrorState.InlineError(throwable.message ?: "Opps, something went wrong"),
+                errorState = ErrorState.InlineError(
+                    throwable.message ?: "Opps, something went wrong",
+                ),
             )
         }
     }

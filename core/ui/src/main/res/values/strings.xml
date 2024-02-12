@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="status_alive">ALIVE</string>
+    <string name="status_dead">DEAD</string>
+    <string name="status_unknown">UNKNOWN</string>
+</resources>
