@@ -6,6 +6,6 @@ package com.pettsme.showcase.base.presentation.model
  *
  */
 interface ViewState {
-    val loadingState: LoadingState
+    val isLoading: Boolean
     val errorState: ErrorState?
 }

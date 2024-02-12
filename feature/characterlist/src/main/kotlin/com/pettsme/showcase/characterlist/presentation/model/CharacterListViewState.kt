@@ -1,16 +1,28 @@
 package com.pettsme.showcase.characterlist.presentation.model
 
 import com.pettsme.showcase.base.presentation.model.ErrorState
-import com.pettsme.showcase.base.presentation.model.LoadingState
 import com.pettsme.showcase.base.presentation.model.ViewState
 
-data class CharacterListViewState(
-    override val loadingState: LoadingState,
+internal data class CharacterListViewState(
+    override val isLoading: Boolean,
     override val errorState: ErrorState?,
     val data: List<CharacterListViewItem>,
 ) : ViewState {
+    val isError = errorState != null
+
     companion object {
         val initialState =
-            CharacterListViewState(LoadingState.WholeScreen, errorState = null, data = emptyList())
+            CharacterListViewState(
+                true,
+                errorState = null,
+                data = emptyList(),
+            )
+
+        val fakeState =
+            CharacterListViewState(
+                isLoading = false,
+                errorState = null,
+                data = fakeCharacterListViewItemList,
+            )
     }
 }
