@@ -1,6 +1,7 @@
 package com.pettsme.showcase.characterlist.presentation
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,7 +41,10 @@ import com.pettsme.showcase.ui.values.Dimen
 import com.pettsme.showcase.viewmodelbase.presentation.model.Ignored
 
 @Composable
-fun CharacterListScreen(modifier: Modifier = Modifier) {
+fun CharacterListScreen(
+    modifier: Modifier = Modifier,
+    navigateToDetails: (Int) -> Unit,
+) {
     val viewModel: CharacterListViewModel = hiltViewModel()
     val state by rememberFlowOnLifecycle(flow = viewModel.state)
         .collectAsState(CharacterListViewState.initialState)
@@ -55,6 +59,7 @@ fun CharacterListScreen(modifier: Modifier = Modifier) {
         modifier = modifier,
         viewState = state,
         viewEventHandler = { viewModel.onViewAction(it) },
+        navigateToDetails = navigateToDetails,
     )
 }
 
@@ -63,6 +68,7 @@ internal fun CharacterListScreenContent(
     modifier: Modifier = Modifier,
     viewState: CharacterListViewState,
     viewEventHandler: (CharacterListViewAction) -> Unit,
+    navigateToDetails: (Int) -> Unit,
 ) {
     // loading and error states not exclusive to the content in several cases,
     // depending on actual content.
@@ -75,7 +81,7 @@ internal fun CharacterListScreenContent(
         // show error based on other stuff (whether it's partial data error or initial
     }
 
-    CharacterList(modifier, viewState, viewEventHandler)
+    CharacterList(modifier, viewState, viewEventHandler, navigateToDetails)
 }
 
 @Composable
@@ -83,12 +89,13 @@ private fun CharacterList(
     modifier: Modifier,
     viewState: CharacterListViewState,
     viewEventHandler: (CharacterListViewAction) -> Unit,
+    navigateToDetails: (Int) -> Unit,
 ) {
     LazyColumn(modifier.fillMaxSize()) {
         items(viewState.data) { item ->
 
             when (item) {
-                is CharacterListViewItem.DataItem -> CharacterListItemView(item)
+                is CharacterListViewItem.DataItem -> CharacterListItemView(item, navigateToDetails)
                 CharacterListViewItem.Loading -> CharacterListItemViewLoading(viewEventHandler)
             }
         }
@@ -96,9 +103,13 @@ private fun CharacterList(
 }
 
 @Composable
-private fun CharacterListItemView(item: CharacterListViewItem.DataItem) {
+private fun CharacterListItemView(
+    item: CharacterListViewItem.DataItem,
+    navigateToDetails: (Int) -> Unit,
+) {
     Card(
         modifier = Modifier
+            .clickable { navigateToDetails(item.id) }
             .padding(Dimen.spacingNormal)
             .fillMaxWidth(),
         // shape = MaterialTheme.shapes.medium,
@@ -182,6 +193,7 @@ private fun CharacterListScreenContentPreviewLight() {
     AppTheme {
         CharacterListScreenContent(
             viewState = CharacterListViewState.fakeState,
+            viewEventHandler = {},
         ) {}
     }
 }
@@ -192,6 +204,7 @@ private fun CharacterListScreenContentPreviewDark() {
     AppTheme(useDarkTheme = true) {
         CharacterListScreenContent(
             viewState = CharacterListViewState.fakeState,
+            viewEventHandler = {},
         ) {}
     }
 }

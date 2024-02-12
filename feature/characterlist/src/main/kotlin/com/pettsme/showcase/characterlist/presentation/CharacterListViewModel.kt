@@ -51,6 +51,7 @@ internal class CharacterListViewModel @Inject constructor(
     private fun refreshStateWithData() {
         val dataItems: MutableList<CharacterListViewItem> = characters.map {
             CharacterListViewItem.DataItem(
+                id = it.id,
                 name = it.name,
                 status = it.vitalStatus,
                 species = it.species,

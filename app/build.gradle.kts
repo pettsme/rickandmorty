@@ -14,4 +14,5 @@ dependencies {
     implementation(project(":core:base"))
     implementation(project(":core:ui"))
     implementation(project(":feature:characterlist"))
+    implementation(project(":feature:characterdetails"))
 }

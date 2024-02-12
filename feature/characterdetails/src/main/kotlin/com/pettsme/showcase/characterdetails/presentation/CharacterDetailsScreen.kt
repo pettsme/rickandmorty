@@ -9,13 +9,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun CharacterDetailsScreen() {
+fun CharacterDetailsScreen(id: Int?) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(text = "CharacterDetailsScreen")
+        Text(text = "CharacterDetailsScreen, id: $id")
     }
 }
-
