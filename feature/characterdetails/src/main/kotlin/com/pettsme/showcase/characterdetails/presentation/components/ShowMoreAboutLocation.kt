@@ -6,6 +6,7 @@ import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +23,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -116,55 +118,73 @@ internal fun ShowMoreAboutLocation(
                     )
                 }
             }
-            AnimatedVisibility(visible = opened.value) {
-                if (fullLocation == null) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(100.dp),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        CircularProgressIndicator(
-                            color = MaterialTheme.colorScheme.onTertiary,
-                        )
-                    }
-                } else {
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Text(
-                            modifier = Modifier
-                                .padding(
-                                    vertical = Dimen.spacingQuarter,
-                                    horizontal = Dimen.spacingNormal,
-                                )
-                                .fillMaxWidth(),
-                            text = stringResource(
-                                id = R.string.details_location_dimension,
-                                fullLocation.dimension,
-                            ),
-                            style = MaterialTheme.typography.bodySmall
-                                .copy(color = MaterialTheme.colorScheme.onTertiary),
-                        )
-                        Text(
-                            modifier = Modifier
-                                .padding(
-                                    vertical = Dimen.spacingQuarter,
-                                    horizontal = Dimen.spacingNormal,
-                                )
-                                .fillMaxWidth(),
-                            text = stringResource(
-                                id = R.string.details_location_type,
-                                fullLocation.type,
-                            ),
-                            style = MaterialTheme.typography.bodySmall
-                                .copy(color = MaterialTheme.colorScheme.onTertiary),
-                        )
-                        Spacer(modifier = Modifier.height(Dimen.spacingNormal))
-                    }
-                }
-            }
+            ExpandableContent(opened, fullLocation)
         }
+    }
+}
+
+@Composable
+private fun ColumnScope.ExpandableContent(
+    opened: MutableState<Boolean>,
+    fullLocation: FullLocation?,
+) {
+    AnimatedVisibility(visible = opened.value) {
+        if (fullLocation == null) {
+            ExpandedLocationLoading()
+        } else {
+            ExpandedLocationContent(fullLocation)
+        }
+    }
+}
+
+@Composable
+private fun ExpandedLocationLoading() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        CircularProgressIndicator(
+            color = MaterialTheme.colorScheme.onTertiary,
+        )
+    }
+}
+
+@Composable
+private fun ExpandedLocationContent(fullLocation: FullLocation) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Text(
+            modifier = Modifier
+                .padding(
+                    vertical = Dimen.spacingQuarter,
+                    horizontal = Dimen.spacingNormal,
+                )
+                .fillMaxWidth(),
+            text = stringResource(
+                id = R.string.details_location_dimension,
+                fullLocation.dimension,
+            ),
+            style = MaterialTheme.typography.bodySmall
+                .copy(color = MaterialTheme.colorScheme.onTertiary),
+        )
+        Text(
+            modifier = Modifier
+                .padding(
+                    vertical = Dimen.spacingQuarter,
+                    horizontal = Dimen.spacingNormal,
+                )
+                .fillMaxWidth(),
+            text = stringResource(
+                id = R.string.details_location_type,
+                fullLocation.type,
+            ),
+            style = MaterialTheme.typography.bodySmall
+                .copy(color = MaterialTheme.colorScheme.onTertiary),
+        )
+        Spacer(modifier = Modifier.height(Dimen.spacingNormal))
     }
 }
