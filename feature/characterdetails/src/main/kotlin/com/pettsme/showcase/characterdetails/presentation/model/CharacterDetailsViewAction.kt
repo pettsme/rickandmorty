@@ -1,3 +1,8 @@
 package com.pettsme.showcase.characterdetails.presentation.model
 
-internal sealed interface CharacterDetailsViewAction
+import com.pettsme.showcase.characterdetails.presentation.model.LocationViewData.LocationType
+
+internal sealed interface CharacterDetailsViewAction {
+    data class LocationExpanded(val type: LocationType, val locationId: Int) :
+        CharacterDetailsViewAction
+}

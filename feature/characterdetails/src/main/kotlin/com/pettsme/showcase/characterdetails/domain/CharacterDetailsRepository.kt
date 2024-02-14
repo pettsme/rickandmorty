@@ -18,4 +18,7 @@ internal class CharacterDetailsRepository @Inject constructor(
             characterDetailsApi.getEpisodes(it).asResult()
                 .map { listOfEpisodes -> mapper.mapToDomainModel(listOfEpisodes) }
         }
+
+    suspend fun getLocationById(id: Int) =
+        characterDetailsApi.getLocation(id).asResult().map { mapper.mapToDomainModel(it) }
 }

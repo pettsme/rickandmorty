@@ -1,10 +1,10 @@
 package com.pettsme.showcase.characterlist.domain
 
+import com.pettsme.showcase.base.domain.model.VitalStatus
 import com.pettsme.showcase.characterlist.data.model.CharacterListApiModel
 import com.pettsme.showcase.characterlist.data.model.CharacterListItemApiModel
 import com.pettsme.showcase.characterlist.domain.model.CharacterListDomainModel
 import com.pettsme.showcase.characterlist.domain.model.CharacterListItemDomainModel
-import com.pettsme.showcase.base.domain.model.VitalStatus
 import com.pettsme.showcase.network.domain.IdExtractor
 import javax.inject.Inject
 

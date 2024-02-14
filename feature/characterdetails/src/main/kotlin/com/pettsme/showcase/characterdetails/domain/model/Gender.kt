@@ -4,7 +4,8 @@ enum class Gender(val value: String) {
     MALE("Male"),
     FEMALE("Female"),
     GENDERLESS("Genderless"),
-    UNKNOWN("Unknown");
+    UNKNOWN("Unknown"),
+    ;
 
     companion object {
         fun fromValue(value: String): Gender {

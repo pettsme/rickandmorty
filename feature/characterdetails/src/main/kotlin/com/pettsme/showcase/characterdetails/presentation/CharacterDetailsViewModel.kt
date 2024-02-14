@@ -63,17 +63,22 @@ internal class CharacterDetailsViewModel @Inject constructor(
                                         species = species,
                                         imageUrl = imageUrl,
                                         gender = gender,
-                                        origin = LocationViewData(origin.id, origin.name),
+                                        origin = LocationViewData(
+                                            id = origin.id,
+                                            name = origin.name,
+                                            type = LocationViewData.LocationType.ORIGIN,
+                                        ),
                                         lastKnownLocation = LocationViewData(
-                                            lastKnownLocation.id,
-                                            lastKnownLocation.name
+                                            id = lastKnownLocation.id,
+                                            name = lastKnownLocation.name,
+                                            type = LocationViewData.LocationType.LAST_KNOWN,
                                         ),
                                         presentInEpisodes = episodes.map {
                                             EpisodeViewData(
                                                 id = it.id,
                                                 name = it.name,
                                                 episodeCode = it.episodeCode,
-                                                aired = it.aired
+                                                aired = it.aired,
                                             )
                                         },
                                     ),
@@ -89,7 +94,29 @@ internal class CharacterDetailsViewModel @Inject constructor(
 
     override fun onViewAction(viewAction: CharacterDetailsViewAction) {
         when (viewAction) {
-            else -> { /* later */
+            is CharacterDetailsViewAction.LocationExpanded -> {
+                launch {
+                    repository.getLocationById(viewAction.locationId).process(
+                        success = {
+                            updateState { state ->
+                                if (viewAction.type == LocationViewData.LocationType.ORIGIN) {
+                                    state.copy(
+                                        data = state.data?.copy(
+                                            originFullLocation = it,
+                                        ),
+                                    )
+                                } else {
+                                    state.copy(
+                                        data = state.data?.copy(
+                                            lastKnownFullLocation = it,
+                                        ),
+                                    )
+                                }
+                            }
+                        },
+                        failure = ::handleError,
+                    )
+                }
             }
         }
     }

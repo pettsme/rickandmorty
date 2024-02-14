@@ -28,7 +28,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import com.pettsme.showcase.characterlist.presentation.components.VitalStatusTag
 import com.pettsme.showcase.characterlist.presentation.model.CharacterListViewAction
 import com.pettsme.showcase.characterlist.presentation.model.CharacterListViewAction.LoadNextPage
 import com.pettsme.showcase.characterlist.presentation.model.CharacterListViewItem
@@ -36,6 +35,7 @@ import com.pettsme.showcase.characterlist.presentation.model.CharacterListViewSt
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.extensions.collectAsEffect
 import com.pettsme.showcase.ui.extensions.rememberFlowOnLifecycle
+import com.pettsme.showcase.ui.presentation.component.VitalStatusTag
 import com.pettsme.showcase.ui.values.AppTheme
 import com.pettsme.showcase.ui.values.Dimen
 import com.pettsme.showcase.viewmodelbase.presentation.model.Ignored
@@ -93,7 +93,6 @@ private fun CharacterList(
 ) {
     LazyColumn(modifier.fillMaxSize()) {
         items(viewState.data) { item ->
-
             when (item) {
                 is CharacterListViewItem.DataItem -> CharacterListItemView(item, navigateToDetails)
                 CharacterListViewItem.Loading -> CharacterListItemViewLoading(viewEventHandler)
@@ -112,7 +111,6 @@ private fun CharacterListItemView(
             .clickable { navigateToDetails(item.id) }
             .padding(Dimen.spacingNormal)
             .fillMaxWidth(),
-        // shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors()
             .copy(containerColor = MaterialTheme.colorScheme.primaryContainer),
         border = BorderStroke(2.dp, color = MaterialTheme.colorScheme.primary),

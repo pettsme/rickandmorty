@@ -1,4 +1,4 @@
-package com.pettsme.showcase.characterlist.presentation.components
+package com.pettsme.showcase.ui.presentation.component
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
@@ -18,7 +18,7 @@ import com.pettsme.showcase.ui.values.AppTheme
 import com.pettsme.showcase.ui.values.Dimen
 
 @Composable
-internal fun VitalStatusTag(modifier: Modifier = Modifier, vitalStatus: VitalStatus) {
+fun VitalStatusTag(modifier: Modifier = Modifier, vitalStatus: VitalStatus) {
     when (vitalStatus) {
         VitalStatus.ALIVE -> Tag(
             modifier,
