@@ -18,4 +18,5 @@
     <string name="details_location_type">Type: %s</string>
 
     <string name="details_episodes">Related Episodes</string>
+    <string name="details_episodes_card_aired">Aired on </string>
 </resources>

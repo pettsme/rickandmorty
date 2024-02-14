@@ -26,6 +26,7 @@ import coil.compose.AsyncImage
 import com.pettsme.showcase.characterdetails.presentation.components.ActionButtonsComponent
 import com.pettsme.showcase.characterdetails.presentation.components.CharacterInfoComponent
 import com.pettsme.showcase.characterdetails.presentation.components.Divider
+import com.pettsme.showcase.characterdetails.presentation.components.EpisodesComponent
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewAction
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewData
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewState
@@ -85,6 +86,7 @@ private fun CharacterDetailsScreenContent(
             CharacterDetailsHeader(viewData = it)
             Divider()
             CharacterInfoComponent(viewData = it)
+            EpisodesComponent(it.presentInEpisodes)
             ActionButtonsComponent(
                 viewData = it,
                 scrollState = scrollState,

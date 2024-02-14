@@ -41,9 +41,38 @@ internal class CharacterDetailsViewModel @Inject constructor(
                 success = { model ->
                     characterDetails = model
                     refreshStateWithData()
+                    getEpisodesForCharacter()
                 },
                 failure = ::handleError,
             )
+        }
+    }
+
+    private fun getEpisodesForCharacter() {
+        launch {
+            characterDetails?.let {
+                repository.getEpisodesForCharacter(it).process(
+                    success = {
+                        updateState { state ->
+                            state.copy(
+                                data = state.data?.copy(
+                                    presentInEpisodes = it.map { episode ->
+                                        with(episode) {
+                                            EpisodeViewData(
+                                                id = id,
+                                                name = name,
+                                                episodeCode = episodeCode,
+                                                aired = aired,
+                                            )
+                                        }
+                                    },
+                                ),
+                            )
+                        }
+                    },
+                    failure = ::handleError,
+                )
+            }
         }
     }
 
