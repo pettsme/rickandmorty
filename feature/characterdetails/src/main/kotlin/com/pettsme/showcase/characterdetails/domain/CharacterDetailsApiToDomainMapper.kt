@@ -8,9 +8,9 @@ import com.pettsme.showcase.characterdetails.domain.model.CharacterDetailsDomain
 import com.pettsme.showcase.characterdetails.domain.model.EpisodeDomainModel
 import com.pettsme.showcase.characterdetails.domain.model.FullLocation
 import com.pettsme.showcase.characterdetails.domain.model.Gender
+import com.pettsme.showcase.characterdetails.domain.model.Location
 import com.pettsme.showcase.network.data.model.LocationApiModel
 import com.pettsme.showcase.network.domain.IdExtractor
-import com.pettsme.showcase.network.domain.model.Location
 import javax.inject.Inject
 
 internal class CharacterDetailsApiToDomainMapper @Inject constructor(

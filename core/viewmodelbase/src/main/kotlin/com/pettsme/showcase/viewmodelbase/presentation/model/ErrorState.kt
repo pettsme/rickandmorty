@@ -1,4 +1,4 @@
-package com.pettsme.showcase.base.presentation.model
+package com.pettsme.showcase.viewmodelbase.presentation.model
 
 /**
  * Modelling different message states, this class is used in the ViewState giving scalable solution

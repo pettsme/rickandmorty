@@ -1,14 +1,16 @@
 package com.pettsme.showcase.characterlist.presentation
 
 import com.pettsme.showcase.base.DispatcherProvider
-import com.pettsme.showcase.base.presentation.model.ErrorState
+import com.pettsme.showcase.base.presentation.StringProvider
 import com.pettsme.showcase.characterlist.domain.CharacterListRepository
 import com.pettsme.showcase.characterlist.domain.model.CharacterListItemDomainModel
 import com.pettsme.showcase.characterlist.presentation.model.CharacterListViewAction
 import com.pettsme.showcase.characterlist.presentation.model.CharacterListViewAction.PullRefreshInitiated
 import com.pettsme.showcase.characterlist.presentation.model.CharacterListViewItem
 import com.pettsme.showcase.characterlist.presentation.model.CharacterListViewState
+import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.viewmodelbase.presentation.BaseViewModel
+import com.pettsme.showcase.viewmodelbase.presentation.model.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -16,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class CharacterListViewModel @Inject constructor(
     private val repository: CharacterListRepository,
+    private val stringProvider: StringProvider,
     dispatcherProvider: DispatcherProvider,
 ) : BaseViewModel<CharacterListViewState, CharacterListViewAction>(
     CharacterListViewState.initialState,
@@ -86,7 +89,8 @@ internal class CharacterListViewModel @Inject constructor(
             state.copy(
                 isLoading = false,
                 errorState = ErrorState.InlineError(
-                    throwable.message ?: "Opps, something went wrong",
+                    throwable.message
+                        ?: stringProvider.getString(R.string.error_message_unknown_error),
                 ),
             )
         }

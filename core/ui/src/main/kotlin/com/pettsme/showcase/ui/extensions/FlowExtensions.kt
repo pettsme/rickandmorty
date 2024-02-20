@@ -14,6 +14,10 @@ import kotlinx.coroutines.flow.onEach
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
+/**
+ * Handy extension function to capture the state flow of the ViewModel
+ * Sets the lifecycle and the min active state for the given flow.
+ */
 @Composable
 fun <T> rememberFlowOnLifecycle(
     flow: Flow<T>,

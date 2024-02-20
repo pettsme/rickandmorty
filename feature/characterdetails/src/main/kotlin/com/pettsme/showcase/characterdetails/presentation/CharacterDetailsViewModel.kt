@@ -2,21 +2,24 @@ package com.pettsme.showcase.characterdetails.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import com.pettsme.showcase.base.DispatcherProvider
-import com.pettsme.showcase.base.presentation.model.ErrorState
+import com.pettsme.showcase.base.presentation.StringProvider
 import com.pettsme.showcase.characterdetails.domain.CharacterDetailsRepository
 import com.pettsme.showcase.characterdetails.domain.model.CharacterDetailsDomainModel
+import com.pettsme.showcase.characterdetails.domain.model.EpisodeDomainModel
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewAction
-import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewData
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewState
 import com.pettsme.showcase.characterdetails.presentation.model.EpisodeViewData
 import com.pettsme.showcase.characterdetails.presentation.model.LocationViewData
+import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.viewmodelbase.presentation.BaseViewModel
+import com.pettsme.showcase.viewmodelbase.presentation.model.ErrorState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 internal class CharacterDetailsViewModel @Inject constructor(
     private val repository: CharacterDetailsRepository,
+    private val stringProvider: StringProvider,
     savedStateHandle: SavedStateHandle,
     dispatcherProvider: DispatcherProvider,
 ) : BaseViewModel<CharacterDetailsViewState, CharacterDetailsViewAction>(
@@ -80,37 +83,12 @@ internal class CharacterDetailsViewModel @Inject constructor(
         characterDetails?.let { details ->
             launch {
                 repository.getEpisodesForCharacter(details).process(
-                    success = { episodes ->
-                        with(details) {
+                    success = { episodes: List<EpisodeDomainModel> ->
+                        with(details) { // this gives context to the context receiver function toViewData()
                             updateState { state ->
                                 state.copy(
                                     isLoading = false,
-                                    data = CharacterDetailsViewData(
-                                        id = id,
-                                        name = name,
-                                        status = status,
-                                        species = species,
-                                        imageUrl = imageUrl,
-                                        gender = gender,
-                                        origin = LocationViewData(
-                                            id = origin.id,
-                                            name = origin.name,
-                                            type = LocationViewData.LocationType.ORIGIN,
-                                        ),
-                                        lastKnownLocation = LocationViewData(
-                                            id = lastKnownLocation.id,
-                                            name = lastKnownLocation.name,
-                                            type = LocationViewData.LocationType.LAST_KNOWN,
-                                        ),
-                                        presentInEpisodes = episodes.map {
-                                            EpisodeViewData(
-                                                id = it.id,
-                                                name = it.name,
-                                                episodeCode = it.episodeCode,
-                                                aired = it.aired,
-                                            )
-                                        },
-                                    ),
+                                    data = episodes.toViewData(),
                                 )
                             }
                         }
@@ -155,7 +133,8 @@ internal class CharacterDetailsViewModel @Inject constructor(
             state.copy(
                 isLoading = false,
                 errorState = ErrorState.InlineError(
-                    throwable.message ?: "Opps, something went wrong",
+                    throwable.message
+                        ?: stringProvider.getString(R.string.error_message_unknown_error),
                 ),
             )
         }

@@ -36,7 +36,10 @@ fun EpisodesComponent(
             .fillMaxWidth()
             .padding(horizontal = Dimen.spacingNormal, vertical = Dimen.spacingHalf),
     ) {
-        Text(text = stringResource(id = R.string.details_episodes))
+        Text(
+            text = stringResource(id = R.string.details_episodes),
+            modifier.padding(bottom = Dimen.spacingNormal),
+        )
 
         if (listOfEpisodes != null) {
             LazyRow(

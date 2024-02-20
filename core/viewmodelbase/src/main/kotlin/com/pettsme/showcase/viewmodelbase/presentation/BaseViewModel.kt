@@ -3,8 +3,8 @@ package com.pettsme.showcase.viewmodelbase.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pettsme.showcase.base.DispatcherProvider
-import com.pettsme.showcase.base.presentation.model.ViewState
 import com.pettsme.showcase.viewmodelbase.presentation.model.ViewEvent
+import com.pettsme.showcase.viewmodelbase.presentation.model.ViewState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.BufferOverflow.SUSPEND

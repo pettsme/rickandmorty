@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App level strings -->
+    <string name="app_title">Rick &amp; Morty Showcase APp</string>
+
+    <!-- Common General Strings-->
     <string name="status_alive">ALIVE</string>
     <string name="status_dead">DEAD</string>
     <string name="status_unknown">UNKNOWN</string>
 
+    <!-- Common Error Messages -->
+    <string name="error_message_unknown_error">Ops, something went wrong!</string>
+
+    <!-- Common Content Descriptions -->
+    <string name="content_description_navigate_back">Navigate back</string>
+
     <!-- Details Screen -->
     <string name="details_description">%s (gender: %s) is a %s, originally from %s. His last known location is %s.</string>
-
     <string name="details_label_species">Species</string>
     <string name="details_label_origin">Originally from</string>
     <string name="details_label_gender">Gender</string>
     <string name="details_label_last_known_location">Last known location</string>
-
     <string name="details_action_show_more">Show more about %s</string>
-
     <string name="details_location_dimension">Dimension: %s</string>
     <string name="details_location_type">Type: %s</string>
-
     <string name="details_episodes">Related Episodes</string>
     <string name="details_episodes_card_aired">Aired on </string>
 </resources>

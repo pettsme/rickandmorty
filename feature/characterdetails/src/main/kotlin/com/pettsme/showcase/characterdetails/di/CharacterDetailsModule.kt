@@ -12,5 +12,5 @@ import retrofit2.create
 @InstallIn(SingletonComponent::class)
 internal object CharacterDetailsModule {
     @Provides
-    fun providesCharacterApi(retrofit: Retrofit): CharacterDetailsApi = retrofit.create()
+    fun providesCharacterDetailsApi(retrofit: Retrofit): CharacterDetailsApi = retrofit.create()
 }

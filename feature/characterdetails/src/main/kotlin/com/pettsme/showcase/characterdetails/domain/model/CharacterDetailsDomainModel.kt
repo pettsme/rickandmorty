@@ -1,7 +1,6 @@
 package com.pettsme.showcase.characterdetails.domain.model
 
 import com.pettsme.showcase.base.domain.model.VitalStatus
-import com.pettsme.showcase.network.domain.model.Location
 
 internal data class CharacterDetailsDomainModel(
     val id: Int,

@@ -1,7 +1,7 @@
 package com.pettsme.showcase.characterlist.presentation.model
 
-import com.pettsme.showcase.base.presentation.model.ErrorState
-import com.pettsme.showcase.base.presentation.model.ViewState
+import com.pettsme.showcase.viewmodelbase.presentation.model.ErrorState
+import com.pettsme.showcase.viewmodelbase.presentation.model.ViewState
 
 internal data class CharacterListViewState(
     override val isLoading: Boolean,

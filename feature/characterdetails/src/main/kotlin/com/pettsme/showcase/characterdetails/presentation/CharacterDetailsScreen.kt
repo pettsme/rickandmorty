@@ -1,5 +1,6 @@
 package com.pettsme.showcase.characterdetails.presentation
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -44,17 +45,23 @@ fun CharacterDetailsScreen() {
     val state by rememberFlowOnLifecycle(flow = viewModel.state)
         .collectAsState(CharacterDetailsViewState.initialState)
 
-    viewModel.events.collectAsEffect { viewEvent ->
-        when (viewEvent) {
-            else -> Ignored
-        }
-    }
+    collectViewEvents(viewModel)
 
     CharacterDetailsScreenContent(
         modifier = Modifier,
         viewState = state,
         viewEventHandler = { viewModel.onViewAction(it) },
     )
+}
+
+@SuppressLint("ComposableNaming")
+@Composable
+private fun collectViewEvents(viewModel: CharacterDetailsViewModel) {
+    viewModel.events.collectAsEffect { viewEvent ->
+        when (viewEvent) {
+            else -> Ignored
+        }
+    }
 }
 
 @Composable

@@ -79,7 +79,8 @@ internal fun ShowMoreAboutLocation(
                         id = R.string.details_action_show_more,
                         simpleLocation.name,
                     ),
-                    style = MaterialTheme.typography.labelMedium.copy(color = MaterialTheme.colorScheme.onTertiary),
+                    style = MaterialTheme.typography.labelMedium
+                        .copy(color = MaterialTheme.colorScheme.onTertiary),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
                     modifier = Modifier

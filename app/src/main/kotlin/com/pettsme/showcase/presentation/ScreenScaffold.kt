@@ -15,11 +15,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.navigation.MainNavHost
+import com.pettsme.showcase.navigation.NavigationConstants
 import com.pettsme.showcase.ui.values.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,19 +35,19 @@ fun ScreenScaffold() {
         val navController = rememberNavController()
         val navBackStackEntryState by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntryState?.destination
-        val shouldShowBack = currentDestination?.route != "characters"
+        val shouldShowBack = currentDestination?.route != NavigationConstants.ROUTE_CHARACTERS
 
         AppTheme {
             Scaffold(
                 topBar = {
                     TopAppBar(
-                        title = { Text(text = "Showcase app") },
+                        title = { Text(text = stringResource(id = R.string.app_title)) },
                         navigationIcon = {
                             if (shouldShowBack) {
                                 IconButton(onClick = navController::navigateUp) {
                                     Icon(
                                         painter = painterResource(id = R.drawable.ic_back),
-                                        contentDescription = "Navigate Back",
+                                        contentDescription = stringResource(id = R.string.content_description_navigate_back),
                                     )
                                 }
                             }

@@ -1,4 +1,4 @@
-package com.pettsme.showcase.base.presentation.model
+package com.pettsme.showcase.viewmodelbase.presentation.model
 
 /**
  * Common states for any view state: All can load and have errors.

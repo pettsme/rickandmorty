@@ -1,5 +1,6 @@
 package com.pettsme.showcase.characterlist.presentation
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -49,11 +50,7 @@ fun CharacterListScreen(
     val state by rememberFlowOnLifecycle(flow = viewModel.state)
         .collectAsState(CharacterListViewState.initialState)
 
-    viewModel.events.collectAsEffect { viewEvent ->
-        when (viewEvent) {
-            else -> Ignored
-        }
-    }
+    collectViewEvents(viewModel)
 
     CharacterListScreenContent(
         modifier = modifier,
@@ -61,6 +58,16 @@ fun CharacterListScreen(
         viewEventHandler = { viewModel.onViewAction(it) },
         navigateToDetails = navigateToDetails,
     )
+}
+
+@SuppressLint("ComposableNaming")
+@Composable
+private fun collectViewEvents(viewModel: CharacterListViewModel) {
+    viewModel.events.collectAsEffect { viewEvent ->
+        when (viewEvent) {
+            else -> Ignored
+        }
+    }
 }
 
 @Composable
