@@ -1,8 +1,13 @@
-# Showcase app for Peter Szucs
+# Showcase app using Rick&Morty API 
 ## Summary
 
 This project is created to showcase my current "ideal application", with high emphasis on app structure and data flow.
 (The last part with other words: I have not put a huge effort on UI.)
+
+## Some screenshots
+| Character List                        | Character Details 1                        | Character Details 2                        |
+|---------------------------------------|--------------------------------------------|--------------------------------------------|
+| ![Image 1](../images/screen_list.png) | ![Image 2](../images/screen_details_1.png) | ![Image 3](../images/screen_details_2.png) |
 
 ## Dependencies
 To define 3rd party libraries and dependencies in one place I used version catalogs.
