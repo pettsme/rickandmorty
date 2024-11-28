@@ -29,6 +29,7 @@ class FeatureConventionPlugin : Plugin<Project> {
                 add(IMPLEMENTATION, project(":core:base"))
                 add(IMPLEMENTATION, project(":core:viewmodelbase"))
                 add(IMPLEMENTATION, project(":core:network"))
+                add(IMPLEMENTATION, project(":core:domain"))
                 add(IMPLEMENTATION, project(":core:ui"))
 
                 add(KSP, versionCatalog.library("moshi.codegen"))

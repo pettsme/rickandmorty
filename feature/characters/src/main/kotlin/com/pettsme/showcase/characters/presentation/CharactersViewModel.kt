@@ -8,6 +8,9 @@ import com.pettsme.showcase.characters.presentation.model.CharactersAction
 import com.pettsme.showcase.characters.presentation.model.CharactersAction.PullRefreshInitiated
 import com.pettsme.showcase.characters.presentation.model.CharactersState
 import com.pettsme.showcase.characters.presentation.model.CharactersUiModel
+import com.pettsme.showcase.core.domain.model.base.RepositoryError
+import com.pettsme.showcase.core.domain.model.base.onError
+import com.pettsme.showcase.core.domain.model.base.onSuccess
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.viewmodelbase.presentation.BaseViewModel
 import com.pettsme.showcase.viewmodelbase.presentation.model.ErrorState
@@ -40,15 +43,14 @@ internal class CharactersViewModel @Inject constructor(
                     isLoading = nextPage == null,
                 )
             }
-            delay(2000)
-            repository.getCharacters(page = page).process(
-                success = { characterListDomainModel ->
+            delay(1000) // just to see the loading -,-
+            repository.getCharacters(page = page)
+                .onSuccess { characterListDomainModel ->
                     characterPreviews.addAll(characterListDomainModel.characterPreviews)
                     nextPage = characterListDomainModel.nextPage
                     refreshStateWithData()
-                },
-                failure = ::handleError,
-            )
+                }
+                .onError(::handleError)
         }
     }
 
@@ -79,12 +81,12 @@ internal class CharactersViewModel @Inject constructor(
         }
     }
 
-    override fun handleError(throwable: Throwable) {
+    override fun handleError(throwable: RepositoryError) {
         updateState { state ->
             state.copy(
                 isLoading = false,
                 errorState = ErrorState.InlineError(
-                    throwable.message
+                    throwable.description
                         ?: stringProvider.getString(R.string.error_message_unknown_error),
                 ),
             )

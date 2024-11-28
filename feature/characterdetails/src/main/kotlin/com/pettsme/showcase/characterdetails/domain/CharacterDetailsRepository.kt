@@ -1,24 +1,41 @@
 package com.pettsme.showcase.characterdetails.domain
 
+import com.pettsme.showcase.base.DispatcherProvider
 import com.pettsme.showcase.characterdetails.data.CharacterDetailsApi
-import com.pettsme.showcase.characterdetails.domain.model.CharacterDetailsDomainModel
-import com.pettsme.showcase.network.data.asResult
-import com.pettsme.showcase.network.data.model.ApiResult
+import com.pettsme.showcase.characterdetails.domain.model.Character
+import com.pettsme.showcase.characterdetails.domain.model.Episode
+import com.pettsme.showcase.core.domain.model.base.RepositoryResult
+import com.pettsme.showcase.core.domain.model.base.asRepositoryResult
+import com.pettsme.showcase.network.data.model.apiCall
+import com.pettsme.showcase.network.data.model.map
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 internal class CharacterDetailsRepository @Inject constructor(
     private val characterDetailsApi: CharacterDetailsApi,
-    private val mapper: CharacterDetailsApiToDomainMapper,
+    private val mapper: CharacterDetailsRepositoryMapper,
+    private val dispatcherProvider: DispatcherProvider,
 ) {
-    suspend fun getCharacter(id: Int): ApiResult<CharacterDetailsDomainModel> =
-        characterDetailsApi.getCharacter(id).asResult().map { mapper.mapToDomainModel(it) }
+    suspend fun getCharacter(id: Int): RepositoryResult<Character> =
+        withContext(dispatcherProvider.io) {
+            apiCall { characterDetailsApi.getCharacter(id) }
+                .map(mapper::map)
+                .asRepositoryResult()
+        }
 
-    suspend fun getEpisodesForCharacter(character: CharacterDetailsDomainModel) =
-        character.presentInEpisodes.joinToString(",").let {
-            characterDetailsApi.getEpisodes(it).asResult()
-                .map { listOfEpisodes -> mapper.mapToDomainModel(listOfEpisodes) }
+    suspend fun getEpisodesForCharacter(
+        characterEpisodeIds: String,
+    ): RepositoryResult<List<Episode>> =
+        withContext(dispatcherProvider.io) {
+            apiCall { characterDetailsApi.getEpisodes(characterEpisodeIds) }
+                .map(mapper::map)
+                .asRepositoryResult()
         }
 
     suspend fun getLocationById(id: Int) =
-        characterDetailsApi.getLocation(id).asResult().map { mapper.mapToDomainModel(it) }
+        withContext(dispatcherProvider.io) {
+            apiCall { characterDetailsApi.getLocation(id) }
+                .map(mapper::map)
+                .asRepositoryResult()
+        }
 }

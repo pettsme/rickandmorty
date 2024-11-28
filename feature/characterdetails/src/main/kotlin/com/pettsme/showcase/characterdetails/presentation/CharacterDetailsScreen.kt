@@ -28,13 +28,13 @@ import com.pettsme.showcase.characterdetails.presentation.components.CharacterIn
 import com.pettsme.showcase.characterdetails.presentation.components.Divider
 import com.pettsme.showcase.characterdetails.presentation.components.EpisodesComponent
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsAction
-import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewData
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsState
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterUiModel
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.extensions.collectAsEffect
 import com.pettsme.showcase.ui.extensions.rememberFlowOnLifecycle
-import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.presentation.component.VitalStatusTag
+import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.theme.AppTheme
 import com.pettsme.showcase.ui.values.Dimen
 import com.pettsme.showcase.viewmodelbase.presentation.model.Ignored
@@ -104,7 +104,7 @@ private fun CharacterDetailsScreenContent(
 }
 
 @Composable
-private fun CharacterDetailsHeader(viewData: CharacterDetailsViewData) {
+private fun CharacterDetailsHeader(viewData: CharacterUiModel) {
     AsyncImage(
         model = viewData.imageUrl,
         contentDescription = "image of ${viewData.name} character",

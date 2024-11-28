@@ -1,10 +1,10 @@
 package com.pettsme.showcase.characterdetails.presentation.model
 
-import com.pettsme.showcase.base.domain.model.VitalStatus
 import com.pettsme.showcase.characterdetails.domain.model.FullLocation
 import com.pettsme.showcase.characterdetails.domain.model.Gender
+import com.pettsme.showcase.core.domain.model.VitalStatus
 
-internal data class CharacterDetailsViewData(
+internal data class CharacterUiModel(
     val id: Int,
     val name: String,
     val status: VitalStatus,
@@ -18,7 +18,7 @@ internal data class CharacterDetailsViewData(
     val lastKnownFullLocation: FullLocation? = null,
 )
 
-internal val fakeCharacterDetailsViewData = CharacterDetailsViewData(
+internal val fakeCharacterUiModel = CharacterUiModel(
     id = 2,
     name = "Morty Smith",
     status = VitalStatus.ALIVE,

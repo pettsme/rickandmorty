@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.pettsme.showcase.base.domain.model.VitalStatus
+import com.pettsme.showcase.core.domain.model.VitalStatus
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.theme.AppTheme
@@ -24,7 +24,7 @@ fun VitalStatusTag(modifier: Modifier = Modifier, vitalStatus: VitalStatus) {
             modifier,
             R.string.status_alive,
             MaterialTheme.colorScheme.secondary,
-            MaterialTheme.colorScheme.onSecondary,
+            MaterialTheme.colorScheme.onSecondary, // todo material colors could be removed...
         )
 
         VitalStatus.DEAD -> Tag(
@@ -44,7 +44,12 @@ fun VitalStatusTag(modifier: Modifier = Modifier, vitalStatus: VitalStatus) {
 }
 
 @Composable
-private fun Tag(modifier: Modifier, @StringRes textRes: Int, backgroundColor: Color, textColor: Color) {
+private fun Tag(
+    modifier: Modifier,
+    @StringRes textRes: Int,
+    backgroundColor: Color,
+    textColor: Color,
+) {
     AppText.Body(
         modifier = modifier
             .background(
@@ -54,6 +59,7 @@ private fun Tag(modifier: Modifier, @StringRes textRes: Int, backgroundColor: Co
             .padding(Dimen.spacingQuarter),
         text = stringResource(id = textRes),
         maxLines = 1,
+        color = textColor,
     )
 }
 

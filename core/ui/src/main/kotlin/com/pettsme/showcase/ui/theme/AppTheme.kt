@@ -21,7 +21,7 @@ fun AppTheme(
 
     CompositionLocalProvider(
         LocalColors provides appColors,
-        LocalTypography provides appTypography
+        LocalTypography provides appTypography,
     ) {
         MaterialTheme(
             colorScheme = MaterialTheme.colorScheme.copy(

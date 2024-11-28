@@ -6,12 +6,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsAction
-import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewData
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterUiModel
 import com.pettsme.showcase.ui.values.Dimen
 
 @Composable
 internal fun ActionButtonsComponent(
-    viewData: CharacterDetailsViewData,
+    viewData: CharacterUiModel,
     scrollState: ScrollState,
     viewEventHandler: (CharacterDetailsAction) -> Unit,
 ) {

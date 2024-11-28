@@ -10,7 +10,8 @@ import androidx.compose.ui.text.style.TextOverflow
 enum class AppText {
     H1,
     H2,
-    Body;
+    Body,
+    ;
 
     @Composable
     operator fun invoke(

@@ -16,13 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewData
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterUiModel
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.values.Dimen
 
 @Composable
-internal fun CharacterInfoComponent(viewData: CharacterDetailsViewData) {
+internal fun CharacterInfoComponent(viewData: CharacterUiModel) {
     Column(modifier = Modifier.padding(horizontal = Dimen.spacingNormal)) {
         AppText.Body(
             text = stringResource(

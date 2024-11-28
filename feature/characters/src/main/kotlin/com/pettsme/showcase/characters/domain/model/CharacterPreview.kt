@@ -1,6 +1,6 @@
 package com.pettsme.showcase.characters.domain.model
 
-import com.pettsme.showcase.base.domain.model.VitalStatus
+import com.pettsme.showcase.core.domain.model.VitalStatus
 
 internal data class CharacterPreview(
     val id: Int,

@@ -1,6 +1,5 @@
 package com.pettsme.showcase.ui.presentation.component.base
 
-
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.values.Dimen.spacingNormal
 
 @Composable
@@ -24,7 +22,7 @@ fun Screen(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .windowInsetsPadding(contentInsets)
+            .windowInsetsPadding(contentInsets),
     ) {
         Column {
             topBar()
@@ -33,7 +31,7 @@ fun Screen(
                     PaddingValues(
                         start = spacingNormal,
                         end = spacingNormal,
-                    )
+                    ),
                 )
             }
         }

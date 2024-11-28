@@ -1,8 +1,8 @@
 package com.pettsme.showcase.characterdetails.domain.model
 
-import com.pettsme.showcase.base.domain.model.VitalStatus
+import com.pettsme.showcase.core.domain.model.VitalStatus
 
-internal data class CharacterDetailsDomainModel(
+internal data class Character(
     val id: Int,
     val name: String,
     val status: VitalStatus,
@@ -12,4 +12,6 @@ internal data class CharacterDetailsDomainModel(
     val lastKnownLocation: Location,
     val presentInEpisodes: List<Int>,
     val imageUrl: String,
-)
+) {
+    val presentInEpisodesIds = presentInEpisodes.joinToString(",")
+}

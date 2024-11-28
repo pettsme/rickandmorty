@@ -6,7 +6,7 @@ import com.pettsme.showcase.viewmodelbase.presentation.model.ViewState
 internal data class CharacterDetailsState(
     override val isLoading: Boolean,
     override val errorState: ErrorState?,
-    val data: CharacterDetailsViewData?,
+    val data: CharacterUiModel?,
 ) : ViewState {
     val isError = errorState != null
 
@@ -22,7 +22,7 @@ internal data class CharacterDetailsState(
             CharacterDetailsState(
                 isLoading = false,
                 errorState = null,
-                data = fakeCharacterDetailsViewData,
+                data = fakeCharacterUiModel,
             )
     }
 }

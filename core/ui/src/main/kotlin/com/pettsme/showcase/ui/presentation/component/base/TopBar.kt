@@ -13,7 +13,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.theme.ProjectTheme
-import com.pettsme.showcase.ui.values.Dimen.spacingHalf
 import com.pettsme.showcase.ui.values.Dimen.spacingThreeQuarter
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,9 +39,9 @@ fun TopBar(
                             painter = painterResource(navigateBackIcon),
                             contentDescription = stringResource(R.string.content_description_navigate_back),
                         )
-                    }
+                    },
                 )
             }
-        } ?: {}
+        } ?: {},
     )
 }

@@ -13,6 +13,7 @@ android {
 
 dependencies {
     implementation(project(":core:base"))
+    implementation(project(":core:domain"))
 
     api(libs.androidx.hilt.navigation.compose)
     api(libs.bundles.compose.core)

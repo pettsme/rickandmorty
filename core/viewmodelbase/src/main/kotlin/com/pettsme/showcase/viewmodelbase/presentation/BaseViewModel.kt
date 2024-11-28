@@ -3,6 +3,7 @@ package com.pettsme.showcase.viewmodelbase.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pettsme.showcase.base.DispatcherProvider
+import com.pettsme.showcase.core.domain.model.base.RepositoryError
 import com.pettsme.showcase.viewmodelbase.presentation.model.ViewEvent
 import com.pettsme.showcase.viewmodelbase.presentation.model.ViewState
 import kotlinx.coroutines.CoroutineScope
@@ -43,7 +44,7 @@ abstract class BaseViewModel<VS : ViewState, Action>(
 
     abstract fun onViewAction(viewAction: Action)
 
-    abstract fun handleError(throwable: Throwable)
+    abstract fun handleError(throwable: RepositoryError)
 
     protected fun dispatchViewEvent(event: ViewEvent) {
         launch {

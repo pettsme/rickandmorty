@@ -1,4 +1,4 @@
-package com.pettsme.showcase.base.domain.model
+package com.pettsme.showcase.core.domain.model
 
 enum class VitalStatus(val value: String) {
     ALIVE("alive"),

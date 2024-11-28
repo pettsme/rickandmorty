@@ -6,4 +6,3 @@ interface ThemedColors {
     val primary: Color
     val background: Color
 }
-

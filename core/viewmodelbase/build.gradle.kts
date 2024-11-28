@@ -12,6 +12,7 @@ android {
 
 dependencies {
     implementation(project(":core:base"))
+    implementation(project(":core:domain"))
     api(libs.androidx.core.ktx)
     api(libs.bundles.lifecycle.ktx)
 
