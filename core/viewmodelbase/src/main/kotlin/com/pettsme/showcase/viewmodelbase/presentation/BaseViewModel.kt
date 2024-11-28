@@ -22,7 +22,7 @@ import timber.log.Timber
  */
 abstract class BaseViewModel<VS : ViewState, Action>(
     initialState: VS,
-    protected val dispatcherProvider: DispatcherProvider,
+    private val dispatcherProvider: DispatcherProvider,
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<VS> = MutableStateFlow(initialState)

@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,14 +18,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewData
 import com.pettsme.showcase.core.ui.R
+import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.values.Dimen
 
 @Composable
 internal fun CharacterInfoComponent(viewData: CharacterDetailsViewData) {
     Column(modifier = Modifier.padding(horizontal = Dimen.spacingNormal)) {
-        Text(
+        AppText.Body(
             text = stringResource(
-                id = R.string.details_description,
+                id = R.string.details_character_description,
                 viewData.name,
                 viewData.gender.value,
                 viewData.species,
@@ -76,15 +76,13 @@ private fun RowScope.Label(@StringRes label: Int, value: String) {
             modifier = Modifier.padding(Dimen.spacingQuarter),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(
+            AppText.Body(
                 text = stringResource(id = label),
-                style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
             )
             Divider()
-            Text(
+            AppText.Body(
                 text = value,
-                style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
             )
         }

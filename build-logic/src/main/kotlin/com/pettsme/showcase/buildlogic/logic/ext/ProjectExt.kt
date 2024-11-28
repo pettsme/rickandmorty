@@ -1,4 +1,4 @@
-package com.pettsme.showcase.build.logic.ext
+package com.pettsme.showcase.buildlogic.logic.ext
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog

@@ -12,7 +12,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -20,8 +19,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.pettsme.showcase.characterdetails.presentation.components.ActionButtonsComponent
@@ -34,8 +33,9 @@ import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetails
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.extensions.collectAsEffect
 import com.pettsme.showcase.ui.extensions.rememberFlowOnLifecycle
+import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.presentation.component.VitalStatusTag
-import com.pettsme.showcase.ui.values.AppTheme
+import com.pettsme.showcase.ui.theme.AppTheme
 import com.pettsme.showcase.ui.values.Dimen
 import com.pettsme.showcase.viewmodelbase.presentation.model.Ignored
 
@@ -120,12 +120,9 @@ private fun CharacterDetailsHeader(viewData: CharacterDetailsViewData) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(
+        AppText.Body(
             text = viewData.name,
-            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
-            modifier = Modifier
-                .weight(1f),
+            modifier = Modifier.weight(1f),
         )
         VitalStatusTag(vitalStatus = viewData.status)
     }
@@ -152,10 +149,10 @@ private fun CharacterListScreenContentPreviewLight() {
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
 private fun CharacterListScreenContentPreviewDark() {
-    AppTheme(useDarkTheme = true) {
+    AppTheme {
         CharacterDetailsScreenContent(
             viewState = CharacterDetailsViewState.fakeState,
         ) {}

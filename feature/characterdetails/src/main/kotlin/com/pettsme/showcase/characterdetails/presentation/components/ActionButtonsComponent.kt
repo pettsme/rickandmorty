@@ -16,7 +16,7 @@ internal fun ActionButtonsComponent(
     viewEventHandler: (CharacterDetailsViewAction) -> Unit,
 ) {
     if (viewData.origin.id != -1) {
-        ShowMoreAboutLocation(
+        ExpandableTextComponent(
             simpleLocation = viewData.origin,
             fullLocation = viewData.originFullLocation,
             scrollState = scrollState,
@@ -24,7 +24,7 @@ internal fun ActionButtonsComponent(
         )
     }
     if (viewData.lastKnownLocation.id != -1) {
-        ShowMoreAboutLocation(
+        ExpandableTextComponent(
             simpleLocation = viewData.lastKnownLocation,
             fullLocation = viewData.lastKnownFullLocation,
             scrollState = scrollState,

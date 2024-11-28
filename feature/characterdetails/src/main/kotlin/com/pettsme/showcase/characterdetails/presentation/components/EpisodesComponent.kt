@@ -13,7 +13,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.pettsme.showcase.characterdetails.presentation.model.EpisodeViewData
 import com.pettsme.showcase.core.ui.R
+import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.values.Dimen
 
 @Composable
@@ -36,9 +36,9 @@ fun EpisodesComponent(
             .fillMaxWidth()
             .padding(horizontal = Dimen.spacingNormal, vertical = Dimen.spacingHalf),
     ) {
-        Text(
+        AppText.Body(
             text = stringResource(id = R.string.details_episodes),
-            modifier.padding(bottom = Dimen.spacingNormal),
+            modifier = modifier.padding(bottom = Dimen.spacingNormal),
         )
 
         if (listOfEpisodes != null) {
@@ -78,26 +78,18 @@ private fun EpisodeCard(data: EpisodeViewData, modifier: Modifier) {
                 .fillMaxWidth()
                 .padding(Dimen.spacingHalf),
         ) {
-            Text(
+            AppText.Body(
                 text = data.name,
-                style = MaterialTheme.typography.labelLarge
-                    .copy(color = MaterialTheme.colorScheme.onSecondaryContainer),
             )
-            Text(
+            AppText.Body(
                 text = data.episodeCode,
-                style = MaterialTheme.typography.labelSmall
-                    .copy(color = MaterialTheme.colorScheme.onSecondaryContainer),
             )
             Spacer(modifier = Modifier.weight(1f))
-            Text(
+            AppText.Body(
                 text = stringResource(id = R.string.details_episodes_card_aired),
-                style = MaterialTheme.typography.labelMedium
-                    .copy(color = MaterialTheme.colorScheme.onSecondaryContainer),
             )
-            Text(
+            AppText.Body(
                 text = data.aired,
-                style = MaterialTheme.typography.labelSmall
-                    .copy(color = MaterialTheme.colorScheme.onSecondaryContainer),
             )
         }
     }

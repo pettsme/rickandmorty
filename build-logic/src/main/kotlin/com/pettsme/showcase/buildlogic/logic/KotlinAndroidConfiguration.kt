@@ -1,17 +1,17 @@
-package com.pettsme.showcase.build.logic
+package com.pettsme.showcase.buildlogic.logic
 
 import com.android.build.api.dsl.CommonExtension
-import com.pettsme.showcase.build.logic.ext.getVersionCatalog
-import com.pettsme.showcase.build.logic.ext.kotlinOptions
-import com.pettsme.showcase.build.logic.ext.library
-import com.pettsme.showcase.build.logic.model.DefaultBuildConfiguration
+import com.pettsme.showcase.buildlogic.logic.ext.getVersionCatalog
+import com.pettsme.showcase.buildlogic.logic.ext.kotlinOptions
+import com.pettsme.showcase.buildlogic.logic.ext.library
+import com.pettsme.showcase.buildlogic.logic.model.DefaultBuildConfiguration
 import org.gradle.api.JavaVersion.VERSION_17
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.provideDelegate
 
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *>
+    commonExtension: CommonExtension<*, *, *, *, *, *>
 ) {
     commonExtension.apply {
         compileSdk = DefaultBuildConfiguration.COMPILE_SDK

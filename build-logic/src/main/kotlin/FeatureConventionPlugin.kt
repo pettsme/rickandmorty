@@ -1,5 +1,5 @@
-import com.pettsme.showcase.build.logic.ext.getVersionCatalog
-import com.pettsme.showcase.build.logic.ext.library
+import com.pettsme.showcase.buildlogic.logic.ext.getVersionCatalog
+import com.pettsme.showcase.buildlogic.logic.ext.library
 import com.pettsme.showcase.build.logic.model.BuildConstants.KSP
 import com.pettsme.showcase.build.logic.model.BuildConstants.TEST_IMPLEMENTATION
 import com.pettsme.showcase.build.logic.model.BuildConstants.TEST_RUNTIME
@@ -20,6 +20,7 @@ class FeatureConventionPlugin : Plugin<Project> {
                 apply("com.pettsme.showcase.core")
                 apply("com.pettsme.showcase.compose")
                 apply("com.google.devtools.ksp")
+                apply("com.pettsme.showcase.spotless")
             }
 
             val versionCatalog = getVersionCatalog()

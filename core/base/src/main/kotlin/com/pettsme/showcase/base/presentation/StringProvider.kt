@@ -1,13 +1,9 @@
 package com.pettsme.showcase.base.presentation
 
-import android.content.Context
 import androidx.annotation.StringRes
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 
-class StringProvider @Inject constructor(
-    @ApplicationContext private val context: Context,
-) {
+interface StringProvider {
+    fun getString(@StringRes stringId: Int): String
 
-    fun getString(@StringRes stringId: Int) = context.getString(stringId)
+    fun getString(@StringRes stringId: Int, vararg values: Any): String
 }

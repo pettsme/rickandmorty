@@ -18,5 +18,7 @@ dependencies {
     api(libs.bundles.compose.core)
     api(libs.bundles.coil)
     api(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3.material3)
+    implementation(libs.androidx.compose.material3.android)
     debugApi(libs.androidx.compose.ui.tooling)
 }

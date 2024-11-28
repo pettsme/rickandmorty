@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.pettsme.showcase.characterdetails.presentation.CharacterDetailsScreen
-import com.pettsme.showcase.characterlist.presentation.CharacterListScreen
+import com.pettsme.showcase.characters.presentation.CharacterListScreen
 import com.pettsme.showcase.navigation.NavigationConstants.NAV_PARAM_ID
 import com.pettsme.showcase.navigation.NavigationConstants.ROUTE_CHARACTERS
 

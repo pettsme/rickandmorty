@@ -1,8 +1,8 @@
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import com.pettsme.showcase.build.logic.configureSpotless
-import com.pettsme.showcase.build.logic.ext.getVersionCatalog
-import com.pettsme.showcase.build.logic.ext.version
+import com.pettsme.showcase.buildlogic.logic.configureSpotless
+import com.pettsme.showcase.buildlogic.logic.ext.getVersionCatalog
+import com.pettsme.showcase.buildlogic.logic.ext.version
 
 /**
  * Configures and applies Spotless linting tool to the gradle project

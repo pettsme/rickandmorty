@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App level strings -->
-    <string name="app_title">Rick &amp; Morty Showcase App</string>
+    <string name="app_title">Rick &amp; Morty</string>
 
     <!-- Common General Strings-->
     <string name="status_alive">ALIVE</string>
@@ -14,8 +14,12 @@
     <!-- Common Content Descriptions -->
     <string name="content_description_navigate_back">Navigate back</string>
 
+    <!-- Characters Screen -->
+    <string name="characters_screen_title">Characters</string>
+    <string name="characters_character_description">%1$s is a %2$s and their gender is a %3$s.</string>
+
     <!-- Details Screen -->
-    <string name="details_description">%s (gender: %s) is a %s, originally from %s. His last known location is %s.</string>
+    <string name="details_character_description">%s is a %s and their species is a %s, originally from %s. His last known location is %s.</string>
     <string name="details_label_species">Species</string>
     <string name="details_label_origin">Originally from</string>
     <string name="details_label_gender">Gender</string>

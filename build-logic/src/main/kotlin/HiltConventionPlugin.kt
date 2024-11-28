@@ -3,8 +3,8 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
-import com.pettsme.showcase.build.logic.ext.getVersionCatalog
-import com.pettsme.showcase.build.logic.ext.library
+import com.pettsme.showcase.buildlogic.logic.ext.getVersionCatalog
+import com.pettsme.showcase.buildlogic.logic.ext.library
 import com.pettsme.showcase.build.logic.model.BuildConstants.KAPT
 import org.jetbrains.kotlin.gradle.utils.IMPLEMENTATION
 

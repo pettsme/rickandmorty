@@ -2,7 +2,7 @@ import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByType
-import com.pettsme.showcase.build.logic.createBuildTypes
+import com.pettsme.showcase.buildlogic.logic.createBuildTypes
 
 /**
  * Configures BuildTypes for the library module, some possible one

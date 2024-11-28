@@ -1,7 +1,6 @@
-package com.pettsme.showcase.build.logic
+package com.pettsme.showcase.buildlogic.logic
 
 import com.diffplug.gradle.spotless.SpotlessExtension
-import com.pettsme.showcase.build.logic.model.BuildConstants
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 

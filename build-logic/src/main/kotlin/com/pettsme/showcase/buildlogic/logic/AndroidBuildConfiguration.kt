@@ -1,4 +1,4 @@
-package com.pettsme.showcase.build.logic
+package com.pettsme.showcase.buildlogic.logic
 
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
@@ -63,7 +63,7 @@ internal fun Project.configureAndroidBuilds(
     }
 }
 
-internal fun CommonExtension<*, *, *, *, *>.createBuildTypes() {
+internal fun CommonExtension<*, *, *, *, *, *>.createBuildTypes() {
     buildTypes {
         BuildType.values().forEach { buildType ->
             maybeCreate(buildType.name.lowercase())
