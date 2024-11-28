@@ -1,6 +1,6 @@
 package com.pettsme.showcase.characterdetails.presentation.model
 
-data class LocationViewData(
+data class LocationUiModel(
     val id: Int,
     val name: String,
     val type: LocationType,

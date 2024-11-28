@@ -3,7 +3,7 @@ package com.pettsme.showcase.characterdetails.presentation.model
 import com.pettsme.showcase.viewmodelbase.presentation.model.ErrorState
 import com.pettsme.showcase.viewmodelbase.presentation.model.ViewState
 
-internal data class CharacterDetailsViewState(
+internal data class CharacterDetailsState(
     override val isLoading: Boolean,
     override val errorState: ErrorState?,
     val data: CharacterDetailsViewData?,
@@ -12,14 +12,14 @@ internal data class CharacterDetailsViewState(
 
     companion object {
         val initialState =
-            CharacterDetailsViewState(
+            CharacterDetailsState(
                 true,
                 errorState = null,
                 data = null,
             )
 
         val fakeState =
-            CharacterDetailsViewState(
+            CharacterDetailsState(
                 isLoading = false,
                 errorState = null,
                 data = fakeCharacterDetailsViewData,

@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import coil.compose.AsyncImage
 import com.pettsme.showcase.characters.presentation.model.CharactersUiModel.CharacterPreviewUiModel
-import com.pettsme.showcase.characters.presentation.model.fakeCharacterListViewItemList
+import com.pettsme.showcase.characters.presentation.model.fakeCharacterUiModels
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.theme.AppTheme
@@ -71,7 +71,7 @@ private fun CharacterDetailColumn(
 fun CharacterListItemComponent_Preview() {
     AppTheme {
         CharacterPreviewComponent(
-            uiModel = fakeCharacterListViewItemList[0],
+            uiModel = fakeCharacterUiModels[0],
             navigateToDetails = {},
         )
     }

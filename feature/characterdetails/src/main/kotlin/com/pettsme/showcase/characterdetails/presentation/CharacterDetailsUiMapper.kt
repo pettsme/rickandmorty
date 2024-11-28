@@ -3,9 +3,9 @@ package com.pettsme.showcase.characterdetails.presentation
 import com.pettsme.showcase.characterdetails.domain.model.CharacterDetailsDomainModel
 import com.pettsme.showcase.characterdetails.domain.model.EpisodeDomainModel
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewData
-import com.pettsme.showcase.characterdetails.presentation.model.EpisodeViewData
-import com.pettsme.showcase.characterdetails.presentation.model.LocationViewData
-import com.pettsme.showcase.characterdetails.presentation.model.LocationViewData.LocationType
+import com.pettsme.showcase.characterdetails.presentation.model.EpisodeUiModel
+import com.pettsme.showcase.characterdetails.presentation.model.LocationUiModel
+import com.pettsme.showcase.characterdetails.presentation.model.LocationUiModel.LocationType
 
 /**
  * Mapper function for list of episodes
@@ -25,12 +25,12 @@ internal fun List<EpisodeDomainModel>.toViewData() =
         species = species,
         imageUrl = imageUrl,
         gender = gender,
-        origin = LocationViewData(
+        origin = LocationUiModel(
             id = origin.id,
             name = origin.name,
             type = LocationType.ORIGIN,
         ),
-        lastKnownLocation = LocationViewData(
+        lastKnownLocation = LocationUiModel(
             id = lastKnownLocation.id,
             name = lastKnownLocation.name,
             type = LocationType.LAST_KNOWN,
@@ -39,7 +39,7 @@ internal fun List<EpisodeDomainModel>.toViewData() =
     )
 
 private fun EpisodeDomainModel.toViewData() =
-    EpisodeViewData(
+    EpisodeUiModel(
         id = id,
         name = name,
         episodeCode = episodeCode,

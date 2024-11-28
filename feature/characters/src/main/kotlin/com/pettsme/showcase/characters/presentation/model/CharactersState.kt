@@ -3,7 +3,7 @@ package com.pettsme.showcase.characters.presentation.model
 import com.pettsme.showcase.viewmodelbase.presentation.model.ErrorState
 import com.pettsme.showcase.viewmodelbase.presentation.model.ViewState
 
-internal data class CharacterListViewState(
+internal data class CharactersState(
     override val isLoading: Boolean,
     override val errorState: ErrorState?,
     val data: List<CharactersUiModel>,
@@ -12,17 +12,17 @@ internal data class CharacterListViewState(
 
     companion object {
         val initialState =
-            CharacterListViewState(
+            CharactersState(
                 true,
                 errorState = null,
                 data = emptyList(),
             )
 
         val fakeState =
-            CharacterListViewState(
+            CharactersState(
                 isLoading = false,
                 errorState = null,
-                data = fakeCharacterListViewItemList,
+                data = fakeCharacterUiModels,
             )
     }
 }

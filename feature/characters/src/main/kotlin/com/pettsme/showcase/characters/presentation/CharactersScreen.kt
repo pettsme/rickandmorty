@@ -22,9 +22,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.pettsme.showcase.characters.presentation.components.CharacterPreviewComponent
-import com.pettsme.showcase.characters.presentation.model.CharacterListViewAction
-import com.pettsme.showcase.characters.presentation.model.CharacterListViewAction.LoadNextPage
-import com.pettsme.showcase.characters.presentation.model.CharacterListViewState
+import com.pettsme.showcase.characters.presentation.model.CharactersAction
+import com.pettsme.showcase.characters.presentation.model.CharactersAction.LoadNextPage
+import com.pettsme.showcase.characters.presentation.model.CharactersState
 import com.pettsme.showcase.characters.presentation.model.CharactersUiModel.CharacterPreviewUiModel
 import com.pettsme.showcase.characters.presentation.model.CharactersUiModel.LoadingUiModel
 import com.pettsme.showcase.core.ui.R
@@ -43,7 +43,7 @@ fun CharacterListScreen(
 ) {
     val viewModel: CharactersViewModel = hiltViewModel()
     val state by rememberFlowOnLifecycle(flow = viewModel.state)
-        .collectAsState(CharacterListViewState.initialState)
+        .collectAsState(CharactersState.initialState)
 
     collectViewEvents(viewModel)
 
@@ -66,8 +66,8 @@ private fun collectViewEvents(viewModel: CharactersViewModel) {
 
 @Composable
 internal fun CharacterListScreenContent(
-    viewState: CharacterListViewState,
-    viewEventHandler: (CharacterListViewAction) -> Unit,
+    viewState: CharactersState,
+    viewEventHandler: (CharactersAction) -> Unit,
     navigateToDetails: (Int) -> Unit,
 ) {
     // loading and error states not exclusive to the content in several cases,
@@ -89,9 +89,9 @@ internal fun CharacterListScreenContent(
 
 @Composable
 private fun CharacterList(
-    viewState: CharacterListViewState,
+    viewState: CharactersState,
     modifier: Modifier = Modifier,
-    viewEventHandler: (CharacterListViewAction) -> Unit,
+    viewEventHandler: (CharactersAction) -> Unit,
     navigateToDetails: (Int) -> Unit,
 ) {
     Screen(
@@ -123,7 +123,7 @@ private fun CharacterList(
 }
 
 @Composable
-private fun CharacterPreviewLoading(viewEventHandler: (CharacterListViewAction) -> Unit) {
+private fun CharacterPreviewLoading(viewEventHandler: (CharactersAction) -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
@@ -151,7 +151,7 @@ private fun Loading(modifier: Modifier = Modifier) {
 private fun CharacterListScreenContentPreviewLight() {
     AppTheme {
         CharacterListScreenContent(
-            viewState = CharacterListViewState.fakeState,
+            viewState = CharactersState.fakeState,
             viewEventHandler = {},
         ) {}
     }
@@ -162,7 +162,7 @@ private fun CharacterListScreenContentPreviewLight() {
 private fun CharacterListScreenContentPreviewDark() {
     AppTheme {
         CharacterListScreenContent(
-            viewState = CharacterListViewState.fakeState,
+            viewState = CharactersState.fakeState,
             viewEventHandler = {},
         ) {}
     }

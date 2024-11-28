@@ -33,8 +33,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.pettsme.showcase.characterdetails.domain.model.FullLocation
-import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewAction
-import com.pettsme.showcase.characterdetails.presentation.model.LocationViewData
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsAction
+import com.pettsme.showcase.characterdetails.presentation.model.LocationUiModel
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.values.Dimen
@@ -44,10 +44,10 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ExpandableTextComponent(
-    simpleLocation: LocationViewData,
+    simpleLocation: LocationUiModel,
     fullLocation: FullLocation?,
     scrollState: ScrollState,
-    viewEventHandler: (CharacterDetailsViewAction) -> Unit,
+    viewEventHandler: (CharacterDetailsAction) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val opened = remember { mutableStateOf(false) }
@@ -85,7 +85,7 @@ internal fun ExpandableTextComponent(
                 IconButton(
                     onClick = {
                         viewEventHandler(
-                            CharacterDetailsViewAction.LocationExpanded(
+                            CharacterDetailsAction.LocationExpanded(
                                 simpleLocation.type,
                                 simpleLocation.id,
                             ),

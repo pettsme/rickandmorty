@@ -4,9 +4,9 @@ import com.pettsme.showcase.base.DispatcherProvider
 import com.pettsme.showcase.base.presentation.StringProvider
 import com.pettsme.showcase.characters.domain.CharactersRepository
 import com.pettsme.showcase.characters.domain.model.CharacterPreview
-import com.pettsme.showcase.characters.presentation.model.CharacterListViewAction
-import com.pettsme.showcase.characters.presentation.model.CharacterListViewAction.PullRefreshInitiated
-import com.pettsme.showcase.characters.presentation.model.CharacterListViewState
+import com.pettsme.showcase.characters.presentation.model.CharactersAction
+import com.pettsme.showcase.characters.presentation.model.CharactersAction.PullRefreshInitiated
+import com.pettsme.showcase.characters.presentation.model.CharactersState
 import com.pettsme.showcase.characters.presentation.model.CharactersUiModel
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.viewmodelbase.presentation.BaseViewModel
@@ -21,8 +21,8 @@ internal class CharactersViewModel @Inject constructor(
     private val uiMapper: CharactersUiMapper,
     private val stringProvider: StringProvider,
     dispatcherProvider: DispatcherProvider,
-) : BaseViewModel<CharacterListViewState, CharacterListViewAction>(
-    CharacterListViewState.initialState,
+) : BaseViewModel<CharactersState, CharactersAction>(
+    CharactersState.initialState,
     dispatcherProvider,
 ) {
 
@@ -69,13 +69,13 @@ internal class CharactersViewModel @Inject constructor(
         }
     }
 
-    override fun onViewAction(viewAction: CharacterListViewAction) {
+    override fun onViewAction(viewAction: CharactersAction) {
         when (viewAction) {
             PullRefreshInitiated -> {
                 getData(page = 1)
             }
 
-            CharacterListViewAction.LoadNextPage -> nextPage?.let { getData(it) }
+            CharactersAction.LoadNextPage -> nextPage?.let { getData(it) }
         }
     }
 

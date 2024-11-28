@@ -11,7 +11,7 @@ internal sealed interface CharactersUiModel {
     data object LoadingUiModel : CharactersUiModel
 }
 
-internal val fakeCharacterListViewItemList = listOf(
+internal val fakeCharacterUiModels = listOf(
     CharactersUiModel.CharacterPreviewUiModel(
         id = 1,
         name = "Rick",

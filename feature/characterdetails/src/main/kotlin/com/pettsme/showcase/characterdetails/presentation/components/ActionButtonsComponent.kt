@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewAction
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsAction
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewData
 import com.pettsme.showcase.ui.values.Dimen
 
@@ -13,7 +13,7 @@ import com.pettsme.showcase.ui.values.Dimen
 internal fun ActionButtonsComponent(
     viewData: CharacterDetailsViewData,
     scrollState: ScrollState,
-    viewEventHandler: (CharacterDetailsViewAction) -> Unit,
+    viewEventHandler: (CharacterDetailsAction) -> Unit,
 ) {
     if (viewData.origin.id != -1) {
         ExpandableTextComponent(

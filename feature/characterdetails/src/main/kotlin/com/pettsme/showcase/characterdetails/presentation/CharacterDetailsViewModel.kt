@@ -6,10 +6,10 @@ import com.pettsme.showcase.base.presentation.StringProvider
 import com.pettsme.showcase.characterdetails.domain.CharacterDetailsRepository
 import com.pettsme.showcase.characterdetails.domain.model.CharacterDetailsDomainModel
 import com.pettsme.showcase.characterdetails.domain.model.EpisodeDomainModel
-import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewAction
-import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewState
-import com.pettsme.showcase.characterdetails.presentation.model.EpisodeViewData
-import com.pettsme.showcase.characterdetails.presentation.model.LocationViewData
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsAction
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsState
+import com.pettsme.showcase.characterdetails.presentation.model.EpisodeUiModel
+import com.pettsme.showcase.characterdetails.presentation.model.LocationUiModel
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.viewmodelbase.presentation.BaseViewModel
 import com.pettsme.showcase.viewmodelbase.presentation.model.ErrorState
@@ -22,8 +22,8 @@ internal class CharacterDetailsViewModel @Inject constructor(
     private val stringProvider: StringProvider,
     savedStateHandle: SavedStateHandle,
     dispatcherProvider: DispatcherProvider,
-) : BaseViewModel<CharacterDetailsViewState, CharacterDetailsViewAction>(
-    CharacterDetailsViewState.initialState,
+) : BaseViewModel<CharacterDetailsState, CharacterDetailsAction>(
+    CharacterDetailsState.initialState,
     dispatcherProvider,
 ) {
     private val characterId: Int = checkNotNull(savedStateHandle["id"])
@@ -61,7 +61,7 @@ internal class CharacterDetailsViewModel @Inject constructor(
                                 data = state.data?.copy(
                                     presentInEpisodes = it.map { episode ->
                                         with(episode) {
-                                            EpisodeViewData(
+                                            EpisodeUiModel(
                                                 id = id,
                                                 name = name,
                                                 episodeCode = episodeCode,
@@ -99,14 +99,14 @@ internal class CharacterDetailsViewModel @Inject constructor(
         }
     }
 
-    override fun onViewAction(viewAction: CharacterDetailsViewAction) {
+    override fun onViewAction(viewAction: CharacterDetailsAction) {
         when (viewAction) {
-            is CharacterDetailsViewAction.LocationExpanded -> {
+            is CharacterDetailsAction.LocationExpanded -> {
                 launch {
                     repository.getLocationById(viewAction.locationId).process(
                         success = {
                             updateState { state ->
-                                if (viewAction.type == LocationViewData.LocationType.ORIGIN) {
+                                if (viewAction.type == LocationUiModel.LocationType.ORIGIN) {
                                     state.copy(
                                         data = state.data?.copy(
                                             originFullLocation = it,

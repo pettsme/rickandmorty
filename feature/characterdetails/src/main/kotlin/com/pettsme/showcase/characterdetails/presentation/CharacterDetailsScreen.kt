@@ -27,9 +27,9 @@ import com.pettsme.showcase.characterdetails.presentation.components.ActionButto
 import com.pettsme.showcase.characterdetails.presentation.components.CharacterInfoComponent
 import com.pettsme.showcase.characterdetails.presentation.components.Divider
 import com.pettsme.showcase.characterdetails.presentation.components.EpisodesComponent
-import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewAction
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsAction
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewData
-import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsViewState
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsState
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.extensions.collectAsEffect
 import com.pettsme.showcase.ui.extensions.rememberFlowOnLifecycle
@@ -43,7 +43,7 @@ import com.pettsme.showcase.viewmodelbase.presentation.model.Ignored
 fun CharacterDetailsScreen() {
     val viewModel: CharacterDetailsViewModel = hiltViewModel()
     val state by rememberFlowOnLifecycle(flow = viewModel.state)
-        .collectAsState(CharacterDetailsViewState.initialState)
+        .collectAsState(CharacterDetailsState.initialState)
 
     collectViewEvents(viewModel)
 
@@ -67,8 +67,8 @@ private fun collectViewEvents(viewModel: CharacterDetailsViewModel) {
 @Composable
 private fun CharacterDetailsScreenContent(
     modifier: Modifier = Modifier,
-    viewState: CharacterDetailsViewState,
-    viewEventHandler: (CharacterDetailsViewAction) -> Unit,
+    viewState: CharacterDetailsState,
+    viewEventHandler: (CharacterDetailsAction) -> Unit,
 ) {
     // loading and error states not exclusive to the content in several cases,
     // depending on actual content.
@@ -144,7 +144,7 @@ private fun Loading(modifier: Modifier) {
 private fun CharacterListScreenContentPreviewLight() {
     AppTheme {
         CharacterDetailsScreenContent(
-            viewState = CharacterDetailsViewState.fakeState,
+            viewState = CharacterDetailsState.fakeState,
         ) {}
     }
 }
@@ -154,7 +154,7 @@ private fun CharacterListScreenContentPreviewLight() {
 private fun CharacterListScreenContentPreviewDark() {
     AppTheme {
         CharacterDetailsScreenContent(
-            viewState = CharacterDetailsViewState.fakeState,
+            viewState = CharacterDetailsState.fakeState,
         ) {}
     }
 }

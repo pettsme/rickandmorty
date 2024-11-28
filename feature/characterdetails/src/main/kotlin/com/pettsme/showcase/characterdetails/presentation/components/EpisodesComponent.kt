@@ -19,14 +19,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.pettsme.showcase.characterdetails.presentation.model.EpisodeViewData
+import com.pettsme.showcase.characterdetails.presentation.model.EpisodeUiModel
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.values.Dimen
 
 @Composable
 fun EpisodesComponent(
-    listOfEpisodes: List<EpisodeViewData>?,
+    listOfEpisodes: List<EpisodeUiModel>?,
     modifier: Modifier = Modifier,
 ) {
     val widthOfEpisodeTile = (LocalConfiguration.current.screenWidthDp / 3).dp
@@ -66,7 +66,7 @@ fun EpisodesComponent(
 }
 
 @Composable
-private fun EpisodeCard(data: EpisodeViewData, modifier: Modifier) {
+private fun EpisodeCard(data: EpisodeUiModel, modifier: Modifier) {
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(corner = CornerSize(Dimen.cornerRadiusNormal)),
