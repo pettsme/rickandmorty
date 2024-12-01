@@ -2,7 +2,7 @@ package com.pettsme.showcase.buildlogic.logic
 
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
-import com.pettsme.showcase.build.logic.model.BuildType
+import com.pettsme.showcase.buildlogic.logic.model.BuildType
 import org.gradle.api.Project
 
 @Suppress("NestedBlockDepth")

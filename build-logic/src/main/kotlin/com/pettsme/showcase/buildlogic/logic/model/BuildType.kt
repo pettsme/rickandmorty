@@ -1,4 +1,4 @@
-package com.pettsme.showcase.build.logic.model
+package com.pettsme.showcase.buildlogic.logic.model
 
 enum class BuildType(
     val packageNameSuffix: String?,

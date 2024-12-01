@@ -1,8 +1,8 @@
 import com.pettsme.showcase.buildlogic.logic.ext.getVersionCatalog
 import com.pettsme.showcase.buildlogic.logic.ext.library
-import com.pettsme.showcase.build.logic.model.BuildConstants.KSP
-import com.pettsme.showcase.build.logic.model.BuildConstants.TEST_IMPLEMENTATION
-import com.pettsme.showcase.build.logic.model.BuildConstants.TEST_RUNTIME
+import com.pettsme.showcase.buildlogic.logic.model.BuildConstants.KSP
+import com.pettsme.showcase.buildlogic.logic.model.BuildConstants.TEST_IMPLEMENTATION
+import com.pettsme.showcase.buildlogic.logic.model.BuildConstants.TEST_RUNTIME
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies

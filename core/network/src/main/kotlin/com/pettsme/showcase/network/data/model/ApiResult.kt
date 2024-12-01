@@ -10,20 +10,6 @@ sealed interface ApiResult<out T> {
     data class Failure(val throwable: Throwable, val responseCode: Int?) : ApiResult<Nothing>
 }
 
-inline fun <T> ApiResult<T>.onSuccess(block: (result: T) -> Unit): ApiResult<T> {
-    if (this is Success) {
-        block(data)
-    }
-    return this
-}
-
-inline fun <T> ApiResult<T>.onError(block: (error: Throwable) -> Unit): ApiResult<T> {
-    if (this is Failure) {
-        block(throwable)
-    }
-    return this
-}
-
 suspend fun <T : Any> apiCall(call: suspend () -> Response<T>): ApiResult<T> {
     return try {
         val response = call.invoke()
