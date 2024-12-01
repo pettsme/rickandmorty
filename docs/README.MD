@@ -9,11 +9,6 @@ This project is created to showcase my current "ideal application", with high em
 |--------------------------------------------|---------------------------------------------------|
 | ![Image 1](images/showcase_characters.png) | ![Image 2](images/showcase_character_details.png) |
 
-## Screen Recording
-
-[!showcase_app.webm](videos/showcase_app.webm)
-
-
 ## Dependencies
 To define 3rd party libraries and dependencies in one place I used version catalogs.
 
