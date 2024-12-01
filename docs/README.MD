@@ -5,9 +5,9 @@ This project is created to showcase my current "ideal application", with high em
 (The last part with other words: I have not put a huge effort on UI.)
 
 ## Some screenshots
-| Character List                        | Character Details 1                        | Character Details 2                        |
-|---------------------------------------|--------------------------------------------|--------------------------------------------|
-| ![Image 1](../images/screen_list.png) | ![Image 2](../images/screen_details_1.png) | ![Image 3](../images/screen_details_2.png) |
+| Character List                             | Character Details 1                               |
+|--------------------------------------------|---------------------------------------------------|
+| ![Image 1](images/showcase_characters.png) | ![Image 2](images/showcase_character_details.png) |
 
 ## Dependencies
 To define 3rd party libraries and dependencies in one place I used version catalogs.
