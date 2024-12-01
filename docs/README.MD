@@ -11,7 +11,8 @@ This project is created to showcase my current "ideal application", with high em
 
 ## Screen Recording
 
-[showcase_app.webm](videos/showcase_app.webm)
+[!showcase_app.webm](videos/showcase_app.webm)
+
 
 ## Dependencies
 To define 3rd party libraries and dependencies in one place I used version catalogs.
