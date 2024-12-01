@@ -18,7 +18,7 @@ import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.presentation.component.text.AppText
 import com.pettsme.showcase.ui.theme.AppTheme
 import com.pettsme.showcase.ui.values.Dimen
-import com.pettsme.showcase.ui.values.Dimen.spacingHalf
+import com.pettsme.showcase.ui.values.Dimen.paddingHalf
 
 @Composable
 internal fun CharacterPreviewComponent(
@@ -51,14 +51,14 @@ private fun CharacterDetailColumn(
 ) {
     Column(
         modifier = modifier
-            .padding(start = Dimen.spacingNormal)
+            .padding(start = Dimen.paddingDefault)
             .fillMaxWidth(),
     ) {
         AppText.H2(
             text = uiModel.name,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.padding(bottom = spacingHalf),
+            modifier = Modifier.padding(bottom = paddingHalf),
         )
         AppText.Body(
             text = uiModel.description,

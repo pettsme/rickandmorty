@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.pettsme.showcase.ui.values.Dimen.spacingNormal
+import com.pettsme.showcase.ui.values.Dimen.paddingDefault
 
 @Composable
 fun Screen(
@@ -29,8 +29,8 @@ fun Screen(
             Box(modifier = Modifier.fillMaxSize()) {
                 content(
                     PaddingValues(
-                        start = spacingNormal,
-                        end = spacingNormal,
+                        start = paddingDefault,
+                        end = paddingDefault,
                     ),
                 )
             }

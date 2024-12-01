@@ -34,11 +34,11 @@ import com.pettsme.showcase.ui.presentation.component.base.Screen
 import com.pettsme.showcase.ui.presentation.component.base.SimpleTopBar
 import com.pettsme.showcase.ui.theme.AppTheme
 import com.pettsme.showcase.ui.values.Dimen
-import com.pettsme.showcase.ui.values.Dimen.spacingNormal
+import com.pettsme.showcase.ui.values.Dimen.paddingDefault
 import com.pettsme.showcase.viewmodelbase.presentation.model.Ignored
 
 @Composable
-fun CharacterListScreen(
+fun CharactersScreen(
     navigateToDetails: (Int) -> Unit,
 ) {
     val viewModel: CharactersViewModel = hiltViewModel()
@@ -104,9 +104,9 @@ private fun CharacterList(
         LazyColumn(
             modifier = modifier
                 .fillMaxSize()
-                .padding(horizontal = spacingNormal)
+                .padding(horizontal = paddingDefault)
                 .imePadding(),
-            verticalArrangement = Arrangement.spacedBy(spacingNormal),
+            verticalArrangement = Arrangement.spacedBy(paddingDefault),
         ) {
             items(viewState.data) { item ->
                 when (item) {
@@ -128,7 +128,7 @@ private fun CharacterPreviewLoading(viewEventHandler: (CharactersAction) -> Unit
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
     ) {
-        CircularProgressIndicator(modifier = Modifier.padding(top = Dimen.spacingNormal))
+        CircularProgressIndicator(modifier = Modifier.padding(top = Dimen.paddingDefault))
     }
     LaunchedEffect("loading") {
         viewEventHandler(LoadNextPage)

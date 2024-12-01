@@ -1,6 +1,6 @@
 package com.pettsme.showcase.characters.domain
 
-import com.pettsme.showcase.base.DispatcherProvider
+import com.pettsme.showcase.base.provider.dispatcher.DispatcherProvider
 import com.pettsme.showcase.characters.data.CharacterListApi
 import com.pettsme.showcase.characters.domain.model.CharacterPreviews
 import com.pettsme.showcase.core.domain.model.base.RepositoryResult

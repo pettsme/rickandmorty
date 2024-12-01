@@ -1,6 +1,5 @@
 package com.pettsme.showcase.characters.presentation
 
-import com.pettsme.showcase.base.DispatcherProvider
 import com.pettsme.showcase.base.presentation.StringProvider
 import com.pettsme.showcase.characters.domain.CharactersRepository
 import com.pettsme.showcase.characters.domain.model.CharacterPreview
@@ -23,10 +22,8 @@ internal class CharactersViewModel @Inject constructor(
     private val repository: CharactersRepository,
     private val uiMapper: CharactersUiMapper,
     private val stringProvider: StringProvider,
-    dispatcherProvider: DispatcherProvider,
 ) : BaseViewModel<CharactersState, CharactersAction>(
     CharactersState.initialState,
-    dispatcherProvider,
 ) {
 
     private val characterPreviews = mutableListOf<CharacterPreview>()

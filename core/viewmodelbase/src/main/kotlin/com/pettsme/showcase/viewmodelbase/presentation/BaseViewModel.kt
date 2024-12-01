@@ -2,7 +2,8 @@ package com.pettsme.showcase.viewmodelbase.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pettsme.showcase.base.DispatcherProvider
+import com.pettsme.showcase.base.provider.dispatcher.DefaultDispatcherProvider
+import com.pettsme.showcase.base.provider.dispatcher.DispatcherProvider
 import com.pettsme.showcase.core.domain.model.base.RepositoryError
 import com.pettsme.showcase.viewmodelbase.presentation.model.ViewEvent
 import com.pettsme.showcase.viewmodelbase.presentation.model.ViewState
@@ -23,9 +24,14 @@ import timber.log.Timber
  */
 abstract class BaseViewModel<VS : ViewState, Action>(
     initialState: VS,
-    private val dispatcherProvider: DispatcherProvider,
 ) : ViewModel() {
 
+    /**
+     * this could be injected through the constructors of the sub classes as Hilt does not support
+     * field injection to abstract classes, but I decided to just create an instance here manually,
+     * to avoid passing the dispatcherProvider to each subclass just for the sake of this need here.
+     */
+    private val dispatcherProvider: DispatcherProvider = DefaultDispatcherProvider()
     private val _state: MutableStateFlow<VS> = MutableStateFlow(initialState)
     val state: StateFlow<VS> = _state.asStateFlow()
 

@@ -5,9 +5,9 @@ import com.pettsme.showcase.characterdetails.data.model.EpisodeApiModel
 import com.pettsme.showcase.characterdetails.data.model.FullLocationApiModel
 import com.pettsme.showcase.characterdetails.domain.model.Character
 import com.pettsme.showcase.characterdetails.domain.model.Episode
-import com.pettsme.showcase.characterdetails.domain.model.FullLocation
 import com.pettsme.showcase.characterdetails.domain.model.Gender
 import com.pettsme.showcase.characterdetails.domain.model.Location
+import com.pettsme.showcase.characterdetails.domain.model.LocationDetails
 import com.pettsme.showcase.core.domain.model.VitalStatus
 import com.pettsme.showcase.network.data.model.LocationApiModel
 import com.pettsme.showcase.network.domain.IdExtractor
@@ -49,7 +49,7 @@ internal class CharacterDetailsRepositoryMapper @Inject constructor(
             ?: -1, // this can happen when the location is "unknown"
     )
 
-    fun map(location: FullLocationApiModel) = FullLocation(
+    fun map(location: FullLocationApiModel) = LocationDetails(
         id = location.id,
         name = location.name,
         type = location.type,

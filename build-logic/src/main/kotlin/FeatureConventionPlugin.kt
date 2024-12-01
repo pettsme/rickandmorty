@@ -36,6 +36,7 @@ class FeatureConventionPlugin : Plugin<Project> {
 
                 add(TEST_IMPLEMENTATION, versionCatalog.library("junit.jupiter"))
                 add(TEST_RUNTIME, versionCatalog.library("junit.jupiter.engine"))
+                add(TEST_IMPLEMENTATION, versionCatalog.library("kotlin.test"))
                 add(TEST_IMPLEMENTATION, versionCatalog.library("mockk"))
                 add(TEST_IMPLEMENTATION, versionCatalog.library("androidx.arch.core.testing"))
                 add(TEST_IMPLEMENTATION, versionCatalog.library("kotlinx.coroutines.test"))

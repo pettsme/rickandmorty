@@ -13,7 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.theme.ProjectTheme
-import com.pettsme.showcase.ui.values.Dimen.spacingThreeQuarter
+import com.pettsme.showcase.ui.values.Dimen.paddingThreeQuarter
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,7 +32,7 @@ fun TopBar(
         navigationIcon = navigateBack?.let {
             {
                 IconButton(
-                    modifier = Modifier.padding(start = spacingThreeQuarter),
+                    modifier = Modifier.padding(start = paddingThreeQuarter),
                     onClick = navigateBack,
                     content = {
                         Icon(

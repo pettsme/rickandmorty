@@ -22,4 +22,7 @@ dependencies {
     implementation(libs.androidx.compose.material3.material3)
     implementation(libs.androidx.compose.material3.android)
     debugApi(libs.androidx.compose.ui.tooling)
+
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotest.assertions.core)
 }

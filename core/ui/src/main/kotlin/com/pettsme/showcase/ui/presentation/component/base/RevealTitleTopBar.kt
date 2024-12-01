@@ -6,13 +6,12 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.pettsme.showcase.core.ui.R
 import com.pettsme.showcase.ui.presentation.component.text.AppText
+import com.pettsme.showcase.ui.theme.ProjectTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RevealTitleTopBar(
     modifier: Modifier = Modifier,
@@ -29,7 +28,7 @@ fun RevealTitleTopBar(
                 enter = slideInVertically(initialOffsetY = { it * 2 }) + fadeIn(),
                 exit = slideOutVertically(targetOffsetY = { it * 2 }) + fadeOut(),
             ) {
-                AppText.H1(text = title, maxLines = 1)
+                AppText.H1(text = title, maxLines = 1, color = ProjectTheme.colors.primary)
             }
         },
         navigateBack = navigateBack,

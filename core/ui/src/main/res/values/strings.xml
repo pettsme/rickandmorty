@@ -19,7 +19,25 @@
     <string name="characters_character_description">%1$s is a %2$s and their gender is a %3$s.</string>
 
     <!-- Details Screen -->
-    <string name="details_character_description">%s is a %s and their species is a %s, originally from %s. His last known location is %s.</string>
+    <string name="character_details_info_title">Character Info</string>
+    <string name="character_details_info_description">%s is a %s and their species is a %s, originally from %s. His last known location is %s.</string>
+    <string name="character_details_status_title">Character Status</string>
+    <string name="character_details_status">%s is</string>
+    <string name="character_details_species_gender_title">Species &amp; Gender</string>
+    <string name="character_details_species">Species: %s</string>
+    <string name="character_details_gender">Gender: %s</string>
+    <string name="character_details_gender_male">Male</string>
+    <string name="character_details_gender_female">Female</string>
+    <string name="character_details_gender_genderless">Genderless</string>
+    <string name="character_details_gender_unknown">Unknown</string>
+    <string name="character_details_origin_location_title">Origin &amp; Location</string>
+    <string name="character_details_origin">Origin: %s</string>
+    <string name="character_details_last_location">Last known location: %s</string>
+    <string name="character_details_location_type">Type: %s</string>
+    <string name="character_details_location_dimension">Dimension: %s</string>
+    <string name="character_details_related_episodes_title">Related Episodes</string>
+    <string name="character_details_related_episodes_air_date">Air Date: %s</string>
+
     <string name="details_label_species">Species</string>
     <string name="details_label_origin">Originally from</string>
     <string name="details_label_gender">Gender</string>

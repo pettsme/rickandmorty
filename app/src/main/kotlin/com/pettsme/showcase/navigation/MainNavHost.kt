@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.pettsme.showcase.characterdetails.presentation.CharacterDetailsScreen
-import com.pettsme.showcase.characters.presentation.CharacterListScreen
+import com.pettsme.showcase.characters.presentation.CharactersScreen
 import com.pettsme.showcase.navigation.NavigationConstants.NAV_PARAM_ID
 import com.pettsme.showcase.navigation.NavigationConstants.ROUTE_CHARACTERS
 
@@ -25,7 +25,7 @@ fun MainNavHost(
         composable(
             route = ROUTE_CHARACTERS,
         ) {
-            CharacterListScreen(
+            CharactersScreen(
                 navigateToDetails = { navController.navigate("$ROUTE_CHARACTERS/$it") },
             )
         }
@@ -33,7 +33,9 @@ fun MainNavHost(
             route = "$ROUTE_CHARACTERS/{${NAV_PARAM_ID}}",
             arguments = listOf(navArgument(NAV_PARAM_ID) { type = NavType.IntType }),
         ) {
-            CharacterDetailsScreen()
+            CharacterDetailsScreen(
+                navigateBack = navController::navigateUp,
+            )
         }
     }
 }

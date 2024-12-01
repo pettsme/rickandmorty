@@ -7,6 +7,7 @@ import com.pettsme.showcase.buildlogic.logic.ext.library
 import com.pettsme.showcase.buildlogic.logic.ext.version
 import com.pettsme.showcase.build.logic.model.BuildConstants.ANDROID_TEST_IMPLEMENTATION
 import com.pettsme.showcase.build.logic.model.BuildConstants.DEBUG_API
+import com.pettsme.showcase.buildlogic.logic.ext.kotlinOptions
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.utils.API
@@ -25,6 +26,12 @@ internal fun Project.configureCompose(
         composeOptions {
             kotlinCompilerExtensionVersion =
                 versionCatalog.version("androidxComposeCompiler")
+        }
+        kotlinOptions {
+            freeCompilerArgs = freeCompilerArgs + listOf(
+                "-P",
+                "plugin:androidx.compose.compiler.plugins.kotlin:stabilityConfigurationPath=${project.rootProject.projectDir.absolutePath}/compose_compiler.conf",
+            )
         }
 
         dependencies {

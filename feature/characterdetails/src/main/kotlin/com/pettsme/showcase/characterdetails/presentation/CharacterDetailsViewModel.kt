@@ -1,16 +1,17 @@
 package com.pettsme.showcase.characterdetails.presentation
 
 import androidx.lifecycle.SavedStateHandle
-import com.pettsme.showcase.base.DispatcherProvider
+import com.pettsme.showcase.base.extensions.updateItem
 import com.pettsme.showcase.base.presentation.StringProvider
 import com.pettsme.showcase.characterdetails.domain.CharacterDetailsRepository
 import com.pettsme.showcase.characterdetails.domain.model.Character
 import com.pettsme.showcase.characterdetails.domain.model.Episode
-import com.pettsme.showcase.characterdetails.domain.model.FullLocation
+import com.pettsme.showcase.characterdetails.domain.model.LocationDetails
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsAction
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsAction.LocationExpanded
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsState
-import com.pettsme.showcase.characterdetails.presentation.model.LocationUiModel
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsUiModel.LocationsUiModel
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsUiModel.RelatedEpisodesUiModel
 import com.pettsme.showcase.core.domain.model.base.RepositoryError
 import com.pettsme.showcase.core.domain.model.base.onError
 import com.pettsme.showcase.core.domain.model.base.onSuccess
@@ -26,10 +27,8 @@ internal class CharacterDetailsViewModel @Inject constructor(
     private val uiMapper: CharacterDetailsUiMapper,
     private val stringProvider: StringProvider,
     savedStateHandle: SavedStateHandle,
-    dispatcherProvider: DispatcherProvider,
 ) : BaseViewModel<CharacterDetailsState, CharacterDetailsAction>(
     CharacterDetailsState.initialState,
-    dispatcherProvider,
 ) {
     private val characterId: Int = checkNotNull(savedStateHandle["id"])
 
@@ -54,24 +53,31 @@ internal class CharacterDetailsViewModel @Inject constructor(
         updateState { state ->
             state.copy(
                 isLoading = false,
-                data = uiMapper.map(character),
+                title = character.name,
+                uiModels = uiMapper.map(character),
             )
         }
-        getEpisodesForCharacter(character)
+        getEpisodesForCharacter(character.presentInEpisodesIds)
     }
 
-    private fun getEpisodesForCharacter(character: Character) {
+    private fun getEpisodesForCharacter(episodeIds: String) {
         launch {
-            repository.getEpisodesForCharacter(character.presentInEpisodesIds)
-                .onSuccess { episodes -> onEpisodesLoaded(character, episodes) }
+            repository.getEpisodesForCharacter(episodeIds)
+                .onSuccess(::onEpisodesLoaded)
                 .onError(::handleError)
         }
     }
 
-    private fun onEpisodesLoaded(character: Character, episodeList: List<Episode>) {
+    private fun onEpisodesLoaded(episodeList: List<Episode>) {
+        val episodeUiModels = uiMapper.map(episodeList)
         updateState { state ->
             state.copy(
-                data = uiMapper.map(character, episodeList),
+                uiModels = state.uiModels.updateItem(
+                    predicate = { it is RelatedEpisodesUiModel },
+                    transform = { uiModel ->
+                        (uiModel as RelatedEpisodesUiModel).copy(episodes = episodeUiModels)
+                    },
+                ),
             )
         }
     }
@@ -83,9 +89,7 @@ internal class CharacterDetailsViewModel @Inject constructor(
                     // this could be pre loaded, but decided to only load if user is curious....
                     // ok not the best UX :)
                     repository.getLocationById(viewAction.locationId)
-                        .onSuccess {
-                            onLocationLoaded(viewAction, it)
-                        }
+                        .onSuccess { onLocationLoaded(viewAction, it) }
                         .onError(::handleError)
                 }
             }
@@ -94,22 +98,28 @@ internal class CharacterDetailsViewModel @Inject constructor(
 
     private fun onLocationLoaded(
         viewAction: LocationExpanded,
-        it: FullLocation,
+        locationDetails: LocationDetails,
     ) {
         updateState { state ->
-            if (viewAction.type == LocationUiModel.LocationType.ORIGIN) {
-                state.copy(
-                    data = state.data?.copy(
-                        originFullLocation = it,
-                    ),
-                )
-            } else {
-                state.copy(
-                    data = state.data?.copy(
-                        lastKnownFullLocation = it,
-                    ),
-                )
-            }
+            state.copy(
+                // first we locate the locations ui model, then the location type- hence two updates
+                uiModels = state.uiModels.updateItem(
+                    predicate = { it is LocationsUiModel },
+                    transform = { uiModel ->
+                        val locationsUiModel = uiModel as LocationsUiModel
+                        locationsUiModel.copy(
+                            locations = locationsUiModel.locations.updateItem(
+                                predicate = { it.type == viewAction.type },
+                                transform = { location ->
+                                    location.copy(
+                                        details = uiMapper.map(locationDetails),
+                                    )
+                                },
+                            ),
+                        )
+                    },
+                ),
+            )
         }
     }
 

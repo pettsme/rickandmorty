@@ -13,4 +13,8 @@ android {
 dependencies {
     api(libs.androidx.core.ktx)
     api(libs.timber)
+
+    // test dependencies without testImplementation so they can be accessed by tests
+    implementation(libs.kotlinx.coroutines.test)
+    implementation(libs.kotlin.test)
 }

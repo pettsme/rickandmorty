@@ -1,57 +1,76 @@
 package com.pettsme.showcase.characterdetails.presentation
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
-import com.pettsme.showcase.characterdetails.presentation.components.ActionButtonsComponent
-import com.pettsme.showcase.characterdetails.presentation.components.CharacterInfoComponent
-import com.pettsme.showcase.characterdetails.presentation.components.Divider
-import com.pettsme.showcase.characterdetails.presentation.components.EpisodesComponent
+import com.pettsme.showcase.characterdetails.presentation.components.CharacterDetailsInfoComponent
+import com.pettsme.showcase.characterdetails.presentation.components.CharacterLocationsComponent
+import com.pettsme.showcase.characterdetails.presentation.components.CharacterNameComponent
+import com.pettsme.showcase.characterdetails.presentation.components.CharacterStatusComponent
+import com.pettsme.showcase.characterdetails.presentation.components.RelatedEpisodesComponent
+import com.pettsme.showcase.characterdetails.presentation.components.SpeciesAndGenderComponent
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsAction
 import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsState
-import com.pettsme.showcase.characterdetails.presentation.model.CharacterUiModel
-import com.pettsme.showcase.core.ui.R
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsUiModel.InfoUiModel
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsUiModel.LocationsUiModel
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsUiModel.NameUiModel
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsUiModel.RelatedEpisodesUiModel
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsUiModel.SpeciesGenderUiModel
+import com.pettsme.showcase.characterdetails.presentation.model.CharacterDetailsUiModel.StatusUiModel
 import com.pettsme.showcase.ui.extensions.collectAsEffect
 import com.pettsme.showcase.ui.extensions.rememberFlowOnLifecycle
-import com.pettsme.showcase.ui.presentation.component.VitalStatusTag
-import com.pettsme.showcase.ui.presentation.component.text.AppText
+import com.pettsme.showcase.ui.presentation.component.base.RevealTitleTopBar
+import com.pettsme.showcase.ui.presentation.component.base.Screen
 import com.pettsme.showcase.ui.theme.AppTheme
-import com.pettsme.showcase.ui.values.Dimen
+import com.pettsme.showcase.ui.values.Dimen.paddingDefault
 import com.pettsme.showcase.viewmodelbase.presentation.model.Ignored
 
 @Composable
-fun CharacterDetailsScreen() {
+fun CharacterDetailsScreen(
+    navigateBack: () -> Unit,
+) {
     val viewModel: CharacterDetailsViewModel = hiltViewModel()
     val state by rememberFlowOnLifecycle(flow = viewModel.state)
         .collectAsState(CharacterDetailsState.initialState)
 
     collectViewEvents(viewModel)
 
-    CharacterDetailsScreenContent(
-        modifier = Modifier,
-        viewState = state,
-        viewEventHandler = { viewModel.onViewAction(it) },
-    )
+    val listState = rememberLazyListState()
+    val showTitle by remember { derivedStateOf { listState.firstVisibleItemIndex > 0 } }
+
+    Screen(
+        topBar = {
+            RevealTitleTopBar(
+                title = state.title,
+                navigateBack = navigateBack,
+                showTitle = showTitle,
+            )
+        },
+    ) {
+        CharacterDetailsScreenContent(
+            modifier = Modifier,
+            state = state,
+            listState = listState,
+            onViewAction = viewModel::onViewAction,
+        )
+    }
 }
 
 @SuppressLint("ComposableNaming")
@@ -67,64 +86,44 @@ private fun collectViewEvents(viewModel: CharacterDetailsViewModel) {
 @Composable
 private fun CharacterDetailsScreenContent(
     modifier: Modifier = Modifier,
-    viewState: CharacterDetailsState,
-    viewEventHandler: (CharacterDetailsAction) -> Unit,
+    state: CharacterDetailsState,
+    listState: LazyListState,
+    onViewAction: (CharacterDetailsAction) -> Unit,
 ) {
     // loading and error states not exclusive to the content in several cases,
     // depending on actual content.
 
-    if (viewState.isLoading) {
+    if (state.isLoading) {
         Loading(modifier)
     }
 
-    if (viewState.isError) {
+    if (state.isError) {
         // show error based on other stuff (whether it's partial data error or initial
     }
 
     val scrollState = rememberScrollState()
 
-    viewState.data?.let {
-        Column(
-            modifier = modifier
-                .fillMaxSize()
-                .verticalScroll(scrollState)
-                .background(color = MaterialTheme.colorScheme.background),
-        ) {
-            CharacterDetailsHeader(viewData = it)
-            Divider()
-            CharacterInfoComponent(viewData = it)
-            EpisodesComponent(it.presentInEpisodes)
-            ActionButtonsComponent(
-                viewData = it,
-                scrollState = scrollState,
-                viewEventHandler = viewEventHandler,
-            )
-        }
-    }
-}
-
-@Composable
-private fun CharacterDetailsHeader(viewData: CharacterUiModel) {
-    AsyncImage(
-        model = viewData.imageUrl,
-        contentDescription = "image of ${viewData.name} character",
-        placeholder = painterResource(id = R.drawable.img_placeholder),
-        contentScale = ContentScale.FillWidth,
-        modifier = Modifier.fillMaxWidth(),
-    )
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = Dimen.spacingNormal)
-            .padding(horizontal = Dimen.spacingNormal),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = paddingDefault),
+        state = listState,
     ) {
-        AppText.Body(
-            text = viewData.name,
-            modifier = Modifier.weight(1f),
-        )
-        VitalStatusTag(vitalStatus = viewData.status)
+        items(state.uiModels) { uiModel ->
+            when (uiModel) {
+                is NameUiModel -> CharacterNameComponent(uiModel)
+                is InfoUiModel -> CharacterDetailsInfoComponent(uiModel)
+                is LocationsUiModel -> CharacterLocationsComponent(
+                    uiModel = uiModel,
+                    scrollState = scrollState,
+                    onViewAction = onViewAction,
+                )
+
+                is RelatedEpisodesUiModel -> RelatedEpisodesComponent(uiModel)
+                is SpeciesGenderUiModel -> SpeciesAndGenderComponent(uiModel)
+                is StatusUiModel -> CharacterStatusComponent(uiModel)
+            }
+        }
     }
 }
 
@@ -139,22 +138,13 @@ private fun Loading(modifier: Modifier) {
     }
 }
 
-@Preview
-@Composable
-private fun CharacterListScreenContentPreviewLight() {
-    AppTheme {
-        CharacterDetailsScreenContent(
-            viewState = CharacterDetailsState.fakeState,
-        ) {}
-    }
-}
-
 @PreviewLightDark
 @Composable
-private fun CharacterListScreenContentPreviewDark() {
+private fun CharacterListScreenContent_Preview() {
     AppTheme {
         CharacterDetailsScreenContent(
-            viewState = CharacterDetailsState.fakeState,
+            state = CharacterDetailsState.fakeState,
+            listState = rememberLazyListState(),
         ) {}
     }
 }
